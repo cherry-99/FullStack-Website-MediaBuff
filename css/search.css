@@ -1,0 +1,13 @@
+#container{
+    border:solid 1px black;
+    display:none
+    }
+    .fooditem{
+    
+        background-color:grey;
+        color:black;	
+    }
+    .fooditem:hover{
+    
+        background-color:white;
+    }

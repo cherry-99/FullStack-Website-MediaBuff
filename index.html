@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>MovieBuff</title>
+	<meta charset="UTF-8">
+	<!-- <meta name="description" content="Cassi Photo Studio HTML Template">
+	<meta name="keywords" content="photo, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/elegant-icons.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+	<!-- <link rel="stylesheet" href="css/NavBar.css"/> -->
+	<link rel="stylesheet" href="css/search.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	<!-- Search Tab Submission Throttling -->
+	<script>
+		function Suggest(){
+		//Maintain a reference to the current object
+			var object=this;
+			this.timer=null;
+			this.search=null;
+			this.container=null;
+			this.url=null;
+			this.xhr=new XMLHttpRequest();
+			this.getTerm=function(){
+				this.search=document.getElementById("search");
+				this.container=document.getElementById("container");
+			//to invoke the send search function only if the user
+			//pauses for a second			
+				if(this.timer){
+					clearTimeout(this.timer);
+				}
+				this.timer=setTimeout(this.sendTerm,1000)
+					
+			}
+			this.sendTerm=function(){
+				object.url="php/suggest.php?term="+object.search.value;
+				//check if the search term is available in cache
+				// i.e. Local Storage
+				if(localStorage.getItem(object.url)){
+					var cacheRes=JSON.parse(localStorage.getItem(object.url))
+					object.populateFood(cacheRes);
+					console.log(localStorage.getItem(object.url));
+					console.log("from browser cache")
+				}
+				else{
+				object.xhr.onreadystatechange=object.showResult;
+				console.log(object.search.value)
+				console.log(this)
+				object.xhr.open("GET",object.url,true);
+				object.xhr.send();
+				}
+			}
+			this.showResult=function(){
+				if(this.readyState==4 && this.status==200){
+					var res=this.responseText;
+					console.log(res);
+					var resO=JSON.parse(res);
+					//Store search result in cache
+					localStorage.setItem(object.url,res);
+					if(resO.length==0){
+					
+						object.search.style.backgroundColor="red"
+						object.search.style.fontStyle="italics"
+					}
+					else{
+						object.populateFood(resO);	
+					}
+				}
+			}
+			this.populateFood=function(resO){
+				object.container.innerHTML="";
+				for(f in resO){
+					
+					var itemDiv=document.createElement("div");
+					itemDiv.innerHTML=resO[f].replace(/[^\x00-\x7F]/g,"");
+					itemDiv.className="fooditem";
+					itemDiv.onclick=object.setFood;
+					object.container.appendChild(itemDiv)
+					console.log(object.container)
+				}
+				object.container.style.display="block";
+				console.log(object.container)
+				document.body.addEventListener('click',object.remove_div,true);
+			
+			}
+			this.setFood=function(e){
+				object.search.value=e.target.innerHTML;
+				object.search.style.backgroundColor="black";
+				object.container.style.display="none"
+				object.container.innerHTML="";
+			
+			}
+			this.remove_div=function(){
+				container = document.getElementById("container");
+				container.parentNode.removeChild(container);
+				container = document.createElement("div");
+				container.id = "container";
+				document.getElementById("cont").appendChild(container);
+			}
+		
+		
+		}
+		
+		var obj=new Suggest();	
+		</script>
+	<!-- End of Search Tab Submission Throttling -->
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Offcanvas Menu Section -->
+	<div class="offcanvas-menu-wrapper">
+		<div class="menu-header">
+			<a href="./index.html" class="site-logo">
+				<!-- <img src="img/logo.png" alt=""> -->
+				<h3 style="color: darkcyan;">MediaBuff</h3>
+			</a>
+			<div class="menu-switch" id="menu-canvas-close">
+				<i class="icon_close"></i>
+			</div>
+		</div>
+		<ul class="main-menu">
+			<li><a href="index.html" class="active">Home</a></li>
+			<li><a href="gallery.html">Movies</a></li>
+			<li><a href="blog.html">TV Series</a></li>
+			<li><a href="news.html">News</a></li>
+			<!-- <li><a href="about.html">About</a></li> -->
+			<li><a href="contact.html">Contact</a></li>
+		</ul>
+	</div>
+	<!-- Offcanvas Menu Section end -->
+	
+	<!-- Header section -->
+	<header class="header-section">
+		<table>
+			<tr>
+				<td><a href="./index.html" class="site-logo"><h3 style="color: darkcyan;">MediaBuff</h3></a></td>
+				<td style="padding-left: 450px;"><input type="text" placeholder="Search" id="search" onkeypress="obj.getTerm()" style="background-color: black; color: floralwhite;"></td>
+				<td style="padding-left: 30px;"><button type="submit" onclick="location.href='signup.html';">Sign Up</button></td>
+				<td style="padding-left: 10px;"><button type="submit" onclick="location.href='signin.html';">Sign In</button></td>
+				<td style="padding-left: 30px;"><div class="menu-switch" id="menu-canvas-show"><i class="icon_menu"></i></div></td>
+			</tr> 
+			<tr>
+				<td></td>
+				<td><div id="cont"><div id="container"></div></div></td>
+			</tr>
+		</table>	
+	</header>
+	<!-- Header section end -->
+
+	<!-- Hero section -->
+	<section class="hero-section">
+		<div class="hero-slider owl-carousel">
+			<div class="hero-item">
+				<div class="hero-text">
+					<div class="ht-cata">Movies</div>
+					<h2>Kick back and Relax!</h2>
+					<p>Browse our enormous catalog of movies and decide your friday night screener. May it be a date or just to simmer down and unlax, we got you covered. Pick from a wide variety of genre and settle in. </p>
+					<a href="#" class="ht-btn">Pick your potion! <i class="arrow_right"></i></a>
+				</div>
+				<div class="hi-bg set-bg" data-setbg="img/movie_poster.png"></div>
+			</div>
+			<div class="hero-item">
+				<div class="hero-text">
+					<div class="ht-cata">TV Series</div>
+					<h2>Keep Binging!</h2>
+					<p>Your daily dose of SOAP's and platform exclusives with all seasons and all episodes at one place! From desi specials to international, catch the latest episodes and watch with the world.</p>
+					<a href="#" class="ht-btn">Explore!<i class="arrow_right"></i></a>
+				</div>
+				<div class="hi-bg set-bg" data-setbg="img/tv_poster.jpg"></div>
+			</div>
+			<div class="hero-item">
+				<div class="hero-text">
+					<div class="ht-cata">In the news</div>
+					<h2>Hey you, more gossip for you!</h2>
+					<p>Catch all the latest news and gossip across the entertainment industry. Update yourself with the recent happenings and find out what your celebrity crushes are doing on the move!</p>
+					<a href="#" class="ht-btn">Catch up!<i class="arrow_right"></i></a>
+				</div>
+				<div class="hi-bg set-bg" data-setbg="img/news-poster.jpg"></div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+	<!-- Footer section -->
+	<footer class="footer-section">
+		<div class="footer-social">
+			<a href="#">Facebook</a>
+			<a href="#">Twitter</a>
+			<a href="#">Instagram</a>
+		</div>
+	</footer>
+	<!-- Footer section end -->
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/vendor/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="js/main.js"></script>
+	</body>
+</html>
