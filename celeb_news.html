@@ -23,10 +23,11 @@
             <link rel="stylesheet" href="assets/css/nice-select.css">
             <link rel="stylesheet" href="assets/css/style.css">
 
+
    <script type="text/javascript">
-   var src_array = ["src_one","src_two","src_three","src_four","src_five","src_six","src_seven","src_eight","src_nine","src_ten","src_eleven","src_twelve","src_thirteen"];
-   var desc_array = ["desc_one","desc_two","desc_three","desc_four","desc_five","desc_six","desc_seven","desc_eight","desc_nine","desc_ten","desc_eleven","desc_twelve","desc_thirteen"];
-   var href_array = ["href_one","href_two","href_three","href_four","href_five","href_six","href_seven","href_eight","href_nine","href_ten","href_eleven","href_twelve","href_thirteen"];
+   var src_array = ["src_one","src_two","src_three","src_four","src_five","src_six","src_seven","src_eight","src_nine","src_ten","src_eleven","src_twelve","src_thirteen" , "src_fourteen","src_fifteen"];
+   var desc_array = ["desc_one","desc_two","desc_three","desc_four","desc_five","desc_six","desc_seven","desc_eight","desc_nine","desc_ten","desc_eleven","desc_twelve","desc_thirteen","desc_fourteen","desc_fifteen"];
+   var href_array = ["href_one","href_two","href_three","href_four","href_five","href_six","href_seven","href_eight","href_nine","href_ten","href_eleven","href_twelve","href_thirteen","href_fourteen","href_fifteen"];
    
     obj=
     {
@@ -57,7 +58,7 @@
                 title = channel.getElementsByTagName("title")[0].innerHTML;
     
                 items = channel.getElementsByTagName("item");
-                for(i = 0 ; i < 13 ; i++)
+                for(i = 0 ; i < 15 ; i++)
                 {
     
                     // header
@@ -84,19 +85,23 @@
     </script>
 </head>
    <body onload="obj.getFeed()">
+    <!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+    </div>
 
     <header>
         <!-- Header Start -->
        <div class="header-area">
-            <div class="main-header ">
+            <div class="main-header">
+                <!-- Add the style attribute in the below div for it to change color -->
                 <div class="header-mid d-none d-md-block">
                    <div class="container">
                         <div class="row d-flex align-items-center">
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3">
                                 <div class="logo">
-                                    <!-- <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a> -->
-                                    <h3 style="color: darkcyan;">MediaBuff</h3>
+                                    <h3 style="color: darkcyan;"><a href="index.html">MediaBuff | News</a></h3>
                                 </div>
                             </div>
                         </div>
@@ -108,34 +113,9 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                     <div class="sticky-logo">
-                                        <h3 style="color: darkcyan;">MediaBuff</h3>
+                                        <h3 style="color: darkcyan;"><a href="index.html">MediaBuff | News</a></h3>
                                     </div>
-                                <!-- Main-menu -->
-                                <div class="main-menu d-none d-md-block">
-                                    <nav>                  
-                                        <ul id="navigation">    
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="categori.html">Category</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="latest_news.html">Latest News</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="#">Pages</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>             
-                            <div class="col-xl-2 col-lg-2 col-md-4">
-                                <div class="header-right-btn f-right d-none d-lg-block">
-                                    <i class="fas fa-search special-tag"></i>
-                                    <div class="search-box">
-                                        <form action="#">
-                                            <input type="text" placeholder="Search">
-                                            
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- Mobile Menu -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-md-none"></div>
@@ -299,7 +279,7 @@
                                     <h4 id="desc_ten"><a id="href_ten"></a></h4>
                                 </div>
                             </div> 
-                            <div class="weekly-single active">
+                            <div class="weekly-single">
                                 <div class="weekly-img">
                                         <img id="src_eleven" alt="">
                                 </div>
@@ -324,6 +304,24 @@
                                 <div class="weekly-caption">
                                     <!-- <span class="color1">Strike</span> -->
                                     <h4 id="desc_thirteen"><a id="href_thirteen"></a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                    <img id="src_fourteen" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <!-- <span class="color1">Strike</span> -->
+                                    <h4 id="desc_fourteen"><a id="href_fourteen"></a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                    <img id="src_fifteen" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <!-- <span class="color1">Strike</span> -->
+                                    <h4 id="desc_fifteen"><a id="href_fifteen"></a></h4>
                                 </div>
                             </div>
                         </div>
