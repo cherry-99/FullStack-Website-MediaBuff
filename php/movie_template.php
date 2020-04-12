@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="../css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="../css/elegant-icons.css"/>
 		<link rel="stylesheet" href="../css/owl.carousel.min.css"/>
-		<!-- <link rel="stylesheet" href="css/NavBar.css"/> -->
+		<link rel="stylesheet" href="../css/NavBar.css"/>
 		<link rel="stylesheet" href="../css/search.css"/>
 
 		<!-- Main Stylesheets -->
@@ -60,7 +60,7 @@
                         <p>Actor 1 : movie_actor1</p>
                         <p>Actor 2 : movie_actor2</p>
                         <p>Actor 3 : movie_actor3</p>
-                        <p>Gross Income : movie_gross_income</p>
+                        <p>Gross Income in $ : movie_gross_income</p>
                         <p>Genre : movie_genre</p>
                         <p>PEGI : movie_PEGI</p>
                         <p>IMDB Rating : movie_rating</p>
