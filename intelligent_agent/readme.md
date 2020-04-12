@@ -5,6 +5,10 @@
 
 route : localhost:5000/api/signup || response : 400 = email already registered, 200 = success || request body : {"username": username, "password":password, "email":unique unregistered email, "actors":"actor1|actor2|actor3|.....|actorN","directors":"director1|director2|director3|.....|directorN","genres":"genre1|genre2|genre3|.....|genreN"}
 
+# API to sign in a user
+
+route : localhost:5000/api/signin || request body : {"email":emailid,"password":password} || response : 200 = success, 400 = account does not exist, 401 = password does not match
+
 # API to list all genres
 
 route : localhost:5000/api/list/genres || response : a list of all genres in database || response code : 200

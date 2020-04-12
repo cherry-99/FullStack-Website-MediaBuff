@@ -41,6 +41,27 @@ def add_user():
         con.execute(sql_command)
     return "",200
 
+# signin API
+# body : {"email":emailid,"password":password}
+# response : 200 = success | 400 = account does not exist | 401 = password does not match
+@app.route('/api/signin', methods=["POST"])
+def signin():
+    body = request.get_json()
+    email = body["email"]
+    password = body["password"]
+    sql_command = "select username,password from users where email='"+email+"';"
+    with engine.connect() as con:
+        x = con.execute(sql_command)
+        l = [i for i in x]
+    if (len(l)==0):
+        return "Email-id not registered",400
+    else:
+        uname,auth_password = l[0][0],l[0][1]
+        if password==auth_password:
+            return jsonify({"username":uname,"email":email}),200
+        else:
+            return "password does not match",401
+
 # list all genres
 @app.route('/api/list/genres', methods=['GET'])
 def list_genres():
