@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>MovieBuff</title>
+	<title>MediaBuff</title>
 	<meta charset="UTF-8">
 	<!-- <meta name="description" content="Cassi Photo Studio HTML Template">
 	<meta name="keywords" content="photo, html">
@@ -106,26 +106,21 @@
 			this.getValue = function(){
 				this.search=document.getElementById("search");
 				console.log(search.value);
-				object.url="php/fetch.php?term="+object.search.value;
+				object.xhr.onreadystatechange=object.pageRedirect;
+				object.url="php/fetch2.php?term="+object.search.value;
+				console.log(object.url);
 				object.xhr.open("GET",object.url,true);
 				object.xhr.send();
+			}
+			this.pageRedirect = function(){
+				if(this.readyState==4 && this.status==200){
+					location.replace("php/dynamic.html");
+				}
 			}
 		}
 		
 		var obj=new Suggest();	
 		</script>
-		// <script>
-		// 	var obj2 = function(){
-		// 	var xhr2 = new XMLHttpRequest();
-		// 	this.getValue = function(){
-		// 		var txt = document.getElementById("search");
-		// 		console.log(txt.value);
-		// 		var val = "php/suggest.php?name="+obj2.txt.value;
-		// 		obj2.xhr2.open("GET",val,true);
-		// 		obj2.xhr2.send();
-		// 	}
-		// }
-		// </script>
 	<!-- End of Search Tab Submission Throttling -->
 </head>
 <body>
