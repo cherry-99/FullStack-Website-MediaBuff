@@ -1,6 +1,10 @@
 # RESTful API routes to access the intelligent feature of our website
 # Hosted as a Flask app on server at localhost:5000
 
+# API to ADD a new user (signup)
+
+route : localhost:5000/api/signup || response : 400 = email already registered, 200 = success || request body : {"username": username, "password":password, "email":unique unregistered email, "actors":"actor1|actor2|actor3|.....|actorN","directors":"director1|director2|director3|.....|directorN","genres":"genre1|genre2|genre3|.....|genreN"}
+
 # API to list all genres
 
 route : localhost:5000/api/list/genres || response : a list of all genres in database || response code : 200
@@ -27,4 +31,4 @@ route : localhost:5000/api/top25/movie || request body : {"movie_name":"(name of
 
 # API to list top 25 movies for a user based on their preferences of actors, directors and genres
 
-route : localhost:5000/api/top25/user || request body : {"user_genres":"genre1,genre2,genre3....genreN","user_directors":"dir1,dir2,dir3...dirN","user_actors":"actor1,actor2....,actorN"} || response : a list of movies best suited to user || response code : 200
+route : localhost:5000/api/top25/user || request body : {"email":"email id of user who has logged in"} || response : a list of movies best suited to user || response code : 200

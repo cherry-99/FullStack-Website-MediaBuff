@@ -1,11 +1,45 @@
 from flask import Flask, request, Response, jsonify
 import json
+from sqlalchemy import create_engine
+import sqlalchemy
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("../php/Final.csv")
-
 app = Flask(__name__)
+
+df = pd.read_csv("../php/Final.csv")
+# database creation --- database name = assignment1.db, tables = users
+engine = create_engine("sqlite:///users.db")
+try:
+    sql_command1 = "create table users (username text, password text, email text primary key, actors text, directors text, genres text);"
+    with engine.connect() as con:
+        con.execute(sql_command1)
+        con.execute("PRAGMA foreign_keys=on;")
+except:
+    pass
+
+# signup API
+# body : {"username": username, "password":password, "email":unique unregistered email, "actors":"actor1|actor2|actor3|.....|actorN","directors":"director1|director2|director3|.....|directorN","genres":"genre1|genre2|genre3|.....|genreN"}
+# response : 200 = signed up | 400 = account already exists with that email
+@app.route('/api/signup', methods=['PUT'])
+def add_user():
+    body = request.get_json()
+    uname = body["username"]
+    password = body["password"]
+    email = body["email"]
+    actors = body["actors"]
+    directors = body["directors"]
+    genres = body["genres"]
+    sql_command = "select username,email from users where email='"+email+"';"
+    with engine.connect() as con:
+        x = con.execute(sql_command)
+        l = [i for i in x]
+    if (len(l)!=0):
+        return "Email-id already registered",400
+    sql_command = "INSERT INTO users (username,password,email,actors,directors,genres) values ('"+uname+"','"+password+"','"+email+"','"+actors+"','"+directors+"','"+genres+"');"
+    with engine.connect() as con:
+        con.execute(sql_command)
+    return "",200
 
 # list all genres
 @app.route('/api/list/genres', methods=['GET'])
@@ -73,13 +107,18 @@ def top25_movie():
     return jsonify(res),200
 
 # 25 movies suggested for a user
-# body required : {"user_genres":"genre1,genre2,genre3....genreN","user_directors":"dir1,dir2,dir3...dirN","user_actors":"actor1,actor2....,actorN"}
+# body required : {"email":"email-id"}
 @app.route('/api/top25/user', methods=['GET'])
 def get_user_suggestions():
-    body = request.get_json()
-    users_genres = body["user_genres"]
-    users_director = body["user_directors"]
-    users_actors = body["user_actors"]
+    email = request.get_json()["email"]
+    sql_command = "select actors,directors,genres from users where email='"+email+"';"
+    with engine.connect() as con:
+        x = con.execute(sql_command)
+        l = [i for i in x]
+    users_actors,users_directors,users_genres = l[0][0],l[0][1],l[0][2]
+    users_genres = users_genres.split("|")
+    users_director = users_directors.split("|")
+    users_actors = users_actors.split("|")
     suggestions = []
     for i in df.T.iteritems():
         score = 0
