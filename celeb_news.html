@@ -22,6 +22,13 @@
             <link rel="stylesheet" href="assets/css/slick.css">
             <link rel="stylesheet" href="assets/css/nice-select.css">
             <link rel="stylesheet" href="assets/css/style.css">
+            
+
+            <!-- Stylesheets -->
+            <link rel="stylesheet" href="css/elegant-icons.css"/>
+
+            <!-- Main Stylesheets -->
+            <link rel="stylesheet" href="css/style.css"/>
 
 
    <script type="text/javascript">
@@ -85,68 +92,53 @@
     </script>
 </head>
    <body onload="obj.getFeed()">
+
+
     <!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
     </div>
-
-    <header>
-        <!-- Header Start -->
-       <div class="header-area">
-            <div class="main-header">
-                <!-- Add the style attribute in the below div for it to change color -->
-                <div class="header-mid d-none d-md-block">
-                   <div class="container">
-                        <div class="row d-flex align-items-center">
-                            <!-- Logo -->
-                            <div class="col-xl-3 col-lg-3 col-md-3">
-                                <div class="logo">
-                                    <h3 style="color: darkcyan;"><a href="index.html">MediaBuff | News</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                   </div>
-                </div>
-               <div class="header-bottom header-sticky">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
-                                <!-- sticky -->
-                                    <div class="sticky-logo">
-                                        <h3 style="color: darkcyan;"><a href="index.html">MediaBuff | News</a></h3>
-                                    </div>
-                            </div>             
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-md-none"></div>
-                            </div>
-                        </div>
-                    </div>
-               </div>
-            </div>
-       </div>
-        <!-- Header End -->
-    </header>
+ 	<!-- Offcanvas Menu Section -->
+     <div class="offcanvas-menu-wrapper">
+		<div class="menu-header">
+			<a href="./index.html" class="site-logo">
+				<h3 style="color: darkcyan;">MediaBuff</h3>
+			</a>
+			<div class="menu-switch" id="menu-canvas-close">
+				<i class="icon_close"></i>
+			</div>
+		</div>
+		<ul class="main-menu">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="movies_home.html">Movies</a></li>
+			<li><a href="news.html" class="active">News</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		</ul>
+	</div>
+    <!-- Offcanvas Menu Section end -->
+    
+    	<!-- Header section -->
+	<header class="header-section">
+		<a href="./index.html" class="site-logo">
+			<!-- <img src="img/logo.png" alt=""> -->
+			<h3 style="color: darkcyan;">MediaBuff | News</h3>
+		</a>
+		<div class="menu-switch" id="menu-canvas-show">
+			<i class="icon_menu"></i>
+		</div>
+	</header>
+    <!-- Header section end -->
 
     <main>
     <!-- Trending Area Start -->
-    <div class="trending-area fix">
-        <div class="container">
+    <div class="trending-area fix" style="background-color: gray;" >
+        <div class="container" >
             <div class="trending-main">
                 <!-- Trending Tittle -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="trending-tittle">
                             <strong>Trending now</strong>
-                            <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
-                            <div class="trending-animated">
-                                <ul id="js-news" class="js-hidden">
-                                    <li class="news-item">Amber Portwood faces the music after her arrest on 'Teen Mom OG'</li>
-                                    <li class="news-item">Gauri Shinde to direct Deepika Padukone Rishi Kapoor starrer truth!</li>
-                                    <li class="news-item">Disha Patani is all praise for Tiger Shroff's 'I'm a Disco Dancer 2.0'</li>
-                                </ul>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -157,7 +149,6 @@
                             <div class="trend-top-img">
                                 <img id = "src_one" alt="">
                                 <div class="trend-top-cap">
-                                    <!-- <span>Appetizers</span> -->
                                     <h2 id="desc_one"><a id="href_one"></a></h2>
                                 </div>
                             </div>
@@ -256,7 +247,7 @@
     <!-- Trending Area End -->
 
     <!--   Weekly-News start -->
-    <div class="weekly-news-area pt-50">
+    <div class="weekly-news-area pt-50" style="background-color: gray;">
         <div class="container">
            <div class="weekly-wrapper">
                 <!-- section Tittle -->
@@ -348,7 +339,7 @@
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p>Suscipit mauris pede for con sectetuer sodales adipisci for cursus fames lectus tempor da blandit gravida sodales  Suscipit mauris pede for con sectetuer sodales adipisci for cursus fames lectus tempor da blandit gravida sodales  Suscipit mauris pede for sectetuer.</p>
+                                        <p>A passionate project of three visionary students encompassing the lengths and breadths of a full fledged website. Developed under the guidence of prestigious professors at PES Uiversity. </p>
                                     </div>
                                 </div>
                                 <!-- social -->
@@ -425,6 +416,9 @@
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
         <script src="jquery-3.4.1.js"></script>
+
+        <!--====== Javascripts & Jquery ======-->
+        <script src="js/main.js"></script>
         
     </body>
 </html>

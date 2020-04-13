@@ -28,6 +28,35 @@
 		}
 		</style>
 
+		<script>
+			function Suggest(){
+			//Maintain a reference to the current object
+				var object=this;
+				this.timer=null;
+				this.search=null;
+				this.container=null;
+				this.url=null;
+				this.xhr=new XMLHttpRequest();
+				
+				
+				this.getValue = function(movie){
+					//this.search=document.getElementById("search");
+					console.log(movie);
+					object.xhr.onreadystatechange=object.pageRedirect;
+					object.url="php/fetch2.php?term="+movie;
+					console.log(object.url);
+					object.xhr.open("GET",object.url,true);
+					object.xhr.send();
+				}
+				this.pageRedirect = function(){
+					if(this.readyState==4 && this.status==200){
+						location.replace("php/dynamic.html");
+					}
+				}
+			}
+			var obj=new Suggest();	
+		</script>
+
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -48,8 +77,7 @@
 		</div>
 		<ul class="main-menu">
 			<li><a href="index.html">Home</a></li>
-			<li><a href="gallery.html" class="active">Movies</a></li>
-			<li><a href="blog.html">TV series</a></li>
+			<li><a href="movies_home.html" class="active">Movies</a></li>
 			<li><a href="news.html">News</a></li>
 			<li><a href="contact.html">Contact</a></li>
 		</ul>
@@ -93,56 +121,49 @@
 			<div class="blog-col">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Avatar</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Avatar')">Avatar</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-sm">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BYThjYzcyYzItNTVjNy00NDk0LTgwMWQtYjMwNmNlNWJhMzMyXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Batman vs Superman : The Dawn Of Justice </a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Batman vs Superman : The Dawn Of Justice')">Batman vs Superman : The Dawn Of Justice</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-sm">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">The dark Knight Rises</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('The dark Knight Rises')">The dark Knight Rises</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-md">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMDEwZmIzNjYtNjUwNS00MzgzLWJiOGYtZWMxZGQ5NDcxZjUwXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UY268_CR6,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">John Carter</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('John Carter')">John Carter</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BYTk3MDljOWQtNGI2My00OTEzLTlhYjQtOTQ4ODM2MzUwY2IwXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Spider Man 3</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Spider Man 3')">Spider Man 3</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-big">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMjM1OTMxNzUyM15BMl5BanBnXkFtZTgwNjYzMTIzOTE@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Suicide Squad</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Suicide Squad')">Suicide Squad</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-md">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Avengers : Age of Ultron</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Avengers : Age of Ultron')">Avengers : Age of Ultron</div>
 					</div>
 				</div>
 			</div>
@@ -155,64 +176,56 @@
 			<div class="blog-col">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BNzU3NDg4NTAyNV5BMl5BanBnXkFtZTcwOTg2ODg1Mg@@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Harry Potter and the Half blood Prince</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Harry Potter and the Half blood Prince')">Harry Potter and the Half blood Prince</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-sm">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMjIyNjkxNzEyMl5BMl5BanBnXkFtZTYwMjc3MDE3._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Pirates of the carribean : At world's end</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Pirates of the carribean : At world\'s end')">Pirates of the carribean : At world's end</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-sm">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMjZiYTUzMzktZWI5Yy00Mzk4LWFlMDgtYjRmNWU0Mzc0MzNiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Quantum of Solace</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Quantum of Solace')">Quantum of Solace</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-md">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BZjFiMTc2MTAtZDA0My00OGRmLTk5M2ItNTlmYTUwZmU2YmRiXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">The Lone Ranger</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('The Lone Ranger')">The Lone Ranger</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-md">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTQxOTA2NDUzOV5BMl5BanBnXkFtZTgwNzY2MTMxMzE@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Furious 7</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Furious 7')">Furious 7</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-md">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTMwNDg0NzcyMV5BMl5BanBnXkFtZTcwNjg4MjQyMw@@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Prince of Persia : Sands of Time</a></h6>
+						<div class="bi-cata" onclick="onj.getValue('Prince of Persia : Sands of Time')">Prince of Persia : Sands of Time</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-md">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMzY3OTI0OTcyMF5BMl5BanBnXkFtZTgwNjkxNTAwOTE@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">The Legend of Tarzan</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('The Legend of Tarzan')">The Legend of Tarzan</div>
 					</div>
 				</div>
 			</div>
 			<div class="blog-col bc-md">
 				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
 					<div class="blog-text">
-						<div class="bi-cata">Rating : </div>
-						<h6><a href="blog-single.html">Intersteller</a></h6>
+						<div class="bi-cata" onclick="obj.getValue('Intersteller')">Intersteller</div>
 					</div>
 				</div>
 			</div>
@@ -225,6 +238,10 @@
 			<a href="#">Facebook</a>
 			<a href="#">Twitter</a>
 			<a href="#">Instagram</a>
+		</div>
+		<div class="copyright"><p>
+			Developed by <i class="fa fa-heart" aria-hidden="true"></i> by PES University
+			</p>
 		</div>
 	</footer>
 	<!-- Footer section end -->
