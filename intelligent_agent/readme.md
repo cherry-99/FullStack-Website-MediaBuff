@@ -21,6 +21,10 @@ route : localhost:5000/api/list/years || response : a list of all years which ar
 
 route : localhost:5000/api/top25/year/(year_required) || response : a list of top movies of the year || response code : 200
 
+# API to list users genres
+
+route : localhost:5000/api/user/genre/(email-id) || response : a list of users genres || response code : 200
+
 # API to list top 25 movies from a genre
 
 route : localhost:5000/api/top25/genre/(genre_required) || response : a list of top movies of the genre || response code : 200
@@ -35,4 +39,4 @@ route : localhost:5000/api/top25/movie || request body : {"movie_name":"(name of
 
 # API to list top 25 movies for a user based on their preferences of actors, directors and genres
 
-route : localhost:5000/api/top25/user || request body : {"email":"email id of user who has logged in"} || response : a list of movies best suited to user || response code : 200
+route : localhost:5000/api/top25/user/(email-id) || response : a list of movies best suited to user || response code : 200
