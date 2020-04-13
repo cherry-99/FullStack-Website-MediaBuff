@@ -831,7 +831,7 @@ ul, ol {
 	}
 }
 .feature-blog {
-	height: 800px;
+	height: 100px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -890,14 +890,14 @@ ul, ol {
 	overflow: hidden;
 }
 .blog-item {
-	height: 430px;
+	height: 320px;
 	margin-bottom: 19px;
 	position: relative;
 }
 .blog-item .blog-text {
 	position: absolute;
 	left: 0;
-	bottom: 35px;
+	bottom: 7.5px;
 	padding: 0 30px;
 }
 .blog-item .blog-text .bi-cata {
@@ -905,7 +905,7 @@ ul, ol {
 	font-size: 12px;
 	font-weight: 500;
 	padding: 3px 13px;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 	text-transform: uppercase;
 	text-align: center;
 	letter-spacing: 2px;
@@ -945,6 +945,15 @@ ul, ol {
 .blog-col.bc-sm {
 	width: 21%;
 }
+
+.blog-col.bc-sm {
+	display: block;
+	width: 250px;
+	height: 320px;
+	border: 1px solid black;
+    padding: 10px;
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
 	.blog-col.bc-sm {
 		width: 25%;
@@ -985,6 +994,35 @@ ul, ol {
 	.blog-col.bc-big {
 		width: 100%;
 	}
+}
+
+.scroll-box:hover {
+	overflow: auto;
+	overflow-y: hidden;
+}
+
+.scroll-box::-webkit-scrollbar{
+	display: none;
+}
+
+.scroll-box {
+	display: flex;
+	widows: 100%;
+	height: 375px;
+	overflow: hidden;
+}
+
+.genres-years .bi-cata {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 3px 13px;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: 2px;
+	color: #fff;
+	background: #242deb;
 }
 /*-------------------
    Blog Single Page
