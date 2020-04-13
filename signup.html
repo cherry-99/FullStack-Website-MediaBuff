@@ -86,6 +86,179 @@ button:hover {
 
 <!-- Main Stylesheets -->
   <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/vendor/jquery-3.2.1.min.js"></script>
+  <script>
+
+    function signinf(){
+      var xhr = new XMLHttpRequest();
+      var url = 'http://localhost:5000/api/signin';
+      this.sendData = function(){
+        name = document.getElementById("name").value;
+        // console.log(name);
+        email = document.getElementById("email").value;
+        // console.log(email);
+        psw = document.getElementById("psw").value;
+        // console.log(psw);
+        psw_repeat = document.getElementById("psw-repeat").value;
+        // console.log(psw_repeat);
+        act1 = document.getElementById("actor1").value;
+        // console.log(act1);
+        act2 = document.getElementById("actor2").value;
+        // console.log(act2);
+        dir1 = document.getElementById("director1").value;
+        // console.log(dir1);
+        dir2 = document.getElementById("director2").value;
+        // console.log(dir2);
+        gen1 = document.getElementById("genre").value;
+        // console.log(gen1);
+        params = '"username":'+name+','+'"password":'+psw+','+'"email":'+email+','+'"actors":'+act1+'|'+act2+','+'"directors":'+dir1+'|'+dir2+','+'"genres":'+gen1;
+        console.log(params);
+        alert("Hello");
+
+        xhr.open('POST', url, true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = obj.redirect;
+        xhr.send(params);
+      }
+      this.redirect = function(){
+        if(this.readyState == 4 && this.status == 200) {
+            document.cookie = "username="+name;
+            location.replace("php/destination-location.html");
+            // alert("Successful!")
+          }
+          else if(this.readyState == 4 && this.status == 400){
+            alert("Account does not exist!");
+          }
+          else if(this.readyState == 4 && this.status == 401){
+            alert("Seems like you have entered the wrong password!");
+          }
+        }
+    }
+    var obj=new signinf();
+  </script>
+<!-- Below script for fetching list of actor 1 -->
+  <script>
+      function fillDataList()
+      {
+        var actor_array = new Array();
+        $.get('actors.txt', function(data){
+            actor_array = data.split('\n');
+        var container = document.getElementById("actor1");
+        i = 0;
+        len = actor_array.length;
+        console.log(len);
+        dl = document.createElement("datalist");
+
+        dl.id = "act1";
+        for (; i < len; i += 1) {
+          var option = document.createElement("option");
+          option.value = actor_array[i];
+          dl.appendChild(option);
+        }
+        container.appendChild(dl);
+        });
+      }
+      fillDataList();
+  </script>
+  <!-- Below script for fetching list of actor 2 -->
+    <script>
+      function fillDataList2()
+      {
+        var actor_array = new Array();
+        $.get('actors.txt', function(data){
+            actor_array = data.split('\n');
+        var container = document.getElementById("actor2");
+        i = 0;
+        len = actor_array.length;
+        console.log(len);
+        dl = document.createElement("datalist");
+
+        dl.id = "act2";
+        for (; i < len; i += 1) {
+          var option = document.createElement("option");
+          option.value = actor_array[i];
+          dl.appendChild(option);
+        }
+        container.appendChild(dl);
+        });
+      }
+      fillDataList2();
+  </script>
+    <!-- Below script for fetching list of Director 1 -->
+    <script>
+      function fillDataList()
+      {
+        var actor_array = new Array();
+        $.get('directors.txt', function(data){
+            actor_array = data.split('\n');
+        var container = document.getElementById("director1");
+        i = 0;
+        len = actor_array.length;
+        console.log(len);
+        dl = document.createElement("datalist");
+
+        dl.id = "dir1";
+        for (; i < len; i += 1) {
+          var option = document.createElement("option");
+          option.value = actor_array[i];
+          dl.appendChild(option);
+        }
+        container.appendChild(dl);
+        });
+      }
+      fillDataList();
+  </script>
+   <!-- Below script for fetching list of Director 2 -->
+   <script>
+    function fillDataList()
+    {
+      var actor_array = new Array();
+      $.get('directors.txt', function(data){
+          actor_array = data.split('\n');
+      var container = document.getElementById("director2");
+      i = 0;
+      len = actor_array.length;
+      console.log(len);
+      dl = document.createElement("datalist");
+
+      dl.id = "dir2";
+      for (; i < len; i += 1) {
+        var option = document.createElement("option");
+        option.value = actor_array[i];
+        dl.appendChild(option);
+      }
+      container.appendChild(dl);
+      });
+    }
+    fillDataList();
+</script>
+<!-- Below script for fetching list of Genres -->
+<script>
+  function fillDataList()
+  {
+    var actor_array = new Array();
+    $.get('genres.txt', function(data){
+        actor_array = data.split('\n');
+    var container = document.getElementById("genre");
+    i = 0;
+    len = actor_array.length;
+    console.log(len);
+    dl = document.createElement("datalist");
+
+    dl.id = "gen";
+    for (; i < len; i += 1) {
+      var option = document.createElement("option");
+      option.value = actor_array[i];
+      dl.appendChild(option);
+    }
+    container.appendChild(dl);
+    });
+  }
+  fillDataList();
+</script>
 <body>
   <!-- Page Preloder -->
 	<div id="preloder">
@@ -123,35 +296,50 @@ button:hover {
 	</header>
     <!-- Header section end -->
 
-<form action="signup.php" method="POST">
+<form>
 <div class="centered">
   <div class="container">
     <h2 style="color: white;">Sign Up</h2>
     <p>Please fill in this form to create an account.</p>
     <hr>
     <label for="name" style="color: white;"><b>Name</b></label>
-    <input type="text" placeholder="Enter Name" name="name" required>
+    <input type="text" placeholder="Enter Name" id="name" required>
     
     <label for="email" style="color: white;"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Email" id="email" required>
 
     <label for="psw" style="color: white;"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" id="psw" required>
 
     <label for="psw-repeat" style="color: white;"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <input type="password" placeholder="Repeat Password" id="psw-repeat" required>
+
+    <label for="actor1" style="color: white;"><b>Actor 1 </b></label>
+    <input list="act1" id="actor1" class="dropDown">
+
+    <label for="dir1" style="color: white;"><b>Director 1</b></label>
+    <input list="dir1" id="director1" class="dropDown">
+    <br>
+    <label for="actor2" style="color: white;"><b>Actor 2</b></label>
+    <input list="act2" id="actor2" class="dropDown">
+
+    <label for="dir2" style="color: white;"><b>Director 2</b></label>
+    <input list="dir2" id="director2" class="dropDown">
+    <br>
+    <label for="genre" style="color: white;"><b>Genre</b></label>
+    <input list="gen" id="genre" class="dropDown">
     
     <p style="color: white;">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick="location.href='index.html';">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
+      <button type="submit" class="signupbtn" onclick="obj.sendData()">Sign Up</button>
     </div>
   </div>
 </div>
 </form>
+
 <!--====== Javascripts & Jquery ======-->
-<script src="js/vendor/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>

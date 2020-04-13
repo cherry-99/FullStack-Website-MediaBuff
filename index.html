@@ -16,6 +16,12 @@
 
 	<!-- Main Stylesheets -->
 	<link rel="stylesheet" href="css/style.css"/>
+	<style>
+		#container{
+			position: fixed;
+  			z-index: 20;
+		}
+	</style>
 	
 	<!-- Search Tab Submission Throttling -->
 	<script>
@@ -151,18 +157,18 @@
 	
 	<!-- Header section -->
 	<header class="header-section">
-		<table>
+		<table >
 			<tr>
 				<td><a href="./index.html" class="site-logo"><h3 style="color: darkcyan;">MediaBuff</h3></a></td>
-				<td style="padding-left: 450px;"><input type="text" placeholder="Search" id="search" onkeypress="obj.getTerm()" style="background-color: black; color: floralwhite;"></td>
-				<td style="padding-left: 30px;"><button type="submit" onclick="obj.getValue()">Search</button></td>
-				<td style="padding-left: 30px;"><button type="submit" onclick="location.href='signup.html';">Sign Up</button></td>
+				<td style="padding-left: 455px;"><input type="text" placeholder="Search" id="search" onkeypress="obj.getTerm()" style="background-color: black; color: floralwhite;"></td>
+				<td style="padding-left: 20px;"><button type="submit" onclick="obj.getValue()">Search</button></td>
+				<td style="padding-left: 20px;"><button type="submit" onclick="location.href='signup.html';">Sign Up</button></td>
 				<td style="padding-left: 10px;"><button type="submit" onclick="location.href='signin.html';">Sign In</button></td>
-				<td style="padding-left: 30px;"><div class="menu-switch" id="menu-canvas-show"><i class="icon_menu"></i></div></td>
+				<td style="padding-left: 300px;"><div class="menu-switch" id="menu-canvas-show"><i class="icon_menu"></i></div></td>
 			</tr> 
 			<tr>
 				<td></td>
-				<td><div id="cont"><div id="container"></div></div></td>
+				<td style="padding-left: 455px;"><div id="cont"><div id="container"></div></div></td>
 			</tr>
 		</table>	
 	</header>
@@ -176,7 +182,7 @@
 					<div class="ht-cata">Movies</div>
 					<h2>Kick back and Relax!</h2>
 					<p>Browse our enormous catalog of movies and decide your friday night screener. May it be a date or just to simmer down and unlax, we got you covered. Pick from a wide variety of genre and settle in. </p>
-					<a href="movies.html" class="ht-btn">Pick your potion! <i class="arrow_right"></i></a>
+					<a href="movies_home.html" class="ht-btn">Pick your potion! <i class="arrow_right"></i></a>
 				</div>
 				<div class="hi-bg set-bg" data-setbg="img/movie_poster.png"></div>
 			</div>
@@ -210,7 +216,7 @@
 			<a href="#">Instagram</a>
 		</div>
 		<div class="copyright"><p>
-			Developed by <i class="fa fa-heart" aria-hidden="true"></i> by PES University
+			Developed with <i class="fa fa-heart" aria-hidden="true"></i> by PES University
 			</p>
 		</div>
 	</footer>
