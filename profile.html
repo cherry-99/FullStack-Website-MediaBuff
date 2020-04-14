@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>Cassi | Photo Studio HTML Template</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Cassi Photo Studio HTML Template">
+	<meta name="keywords" content="photo, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/elegant-icons.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Offcanvas Menu Section -->
+	<div class="offcanvas-menu-wrapper">
+		<div class="menu-header">
+			<a href="./index.html" class="site-logo">
+				<img src="img/logo.png" alt="">
+			</a>
+			<div class="menu-switch" id="menu-canvas-close">
+				<i class="icon_close"></i>
+			</div>
+		</div>
+		<ul class="main-menu">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="gallery.html">Movies</a></li>
+			<li><a href="blog.html" class="active">Blog</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		</ul>
+	</div>
+	<!-- Offcanvas Menu Section end -->
+	
+	<!-- Header section -->
+	<header class="header-section">
+		<a href="./index.html" class="site-logo">
+			<img src="img/logo.png" alt="">
+		</a>
+		<div class="menu-switch" id="menu-canvas-show">
+			<i class="icon_menu"></i>
+		</div>
+	</header>
+    <!-- Header section end -->
+
+    <!-- Users Personal Recommendations -->
+    <div class="feature-blog set-bg">
+        <div class="container">
+            <h2>&nbsp;&nbsp;Recommendations For You</h2>
+        </div>
+    </div>
+    <section class="blog-section">
+        <div class="blog-post-items">
+            <ul class="scroll-box" id="user-recommendations">
+            </ul>
+        </div>
+    </section>
+
+    <!-- Users Genres  -->
+    <div class="feature-blog set-bg">
+        <div class="container">
+            <h2>&nbsp;&nbsp;&nbsp;Top Movies In Your Genres</h2>
+        </div>
+    </div>
+    <div id="genres-container"></div>
+    <!-- ALL TIME TOP MOVIES -->
+    <div class="feature-blog set-bg">
+		<div class="container">
+			<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Movies Of All Time</h2>
+		</div>
+	</div>
+    <section class="blog-section">
+		<div class="blog-post-items">
+            <ul class="scroll-box" id="all-time-top-movies">
+            </ul>
+        </div>
+    </section>
+
+	<!--====== Javascripts & Jquery ======-->
+    <script>
+            // function to load movies and append to ul with same id
+            function load_movies(movie_list,id){
+                console.log(movie_list);
+                var ul = document.getElementById(id);
+                for(movie in movie_list){
+                    poster_link = movie_list[movie][1];
+                    movie_name = movie_list[movie][0];
+                    var li = document.createElement("LI");
+                    var div1 = document.createElement("div");
+                    div1.setAttribute("class","blog-col bc-sm");
+                    var a = document.createElement("a");
+                    a.setAttribute("href","localhost/FullStack-Website-MediaBuff/php/dynamic.html");
+                    var div2 = document.createElement("div");
+                    div2.setAttribute("class","blog-item set-bg");
+                    div2.setAttribute("data-setbg",poster_link);
+                    var div3 = document.createElement("div");
+                    div3.setAttribute("class","blog-text");
+                    var div4 = document.createElement("div");
+                    div4.setAttribute("class","bi-cata");
+                    div4.textContent = movie_name;
+                    div3.appendChild(div4);
+                    div2.appendChild(div3);
+                    a.appendChild(div2);
+                    div1.appendChild(a);
+                    li.appendChild(div1)
+                    ul.appendChild(li);
+                }
+            }
+            // function to create structure for genres
+            function load_genre_movies(genre_list){
+                var main_div = document.getElementById("genres-container")
+                for (genre in genre_list){
+                    var div1 = document.createElement("div");
+                    var cen = document.createElement("center");
+                    var h_two = document.createElement("h2");
+                    h_two.setAttribute("id","gen-"+genre+"-title");
+                    h_two.setAttribute("style","color:white");
+                    h_two.innerHTML = genre_list[genre];
+                    cen.appendChild(h_two);
+                    div1.appendChild(cen);
+                    main_div.appendChild(div1);
+                    sec = document.createElement("section");
+                    sec.setAttribute("class","blog-section");
+                    div2 = document.createElement("div");
+                    div2.setAttribute("class","blog-post-items");
+                    ul = document.createElement("ul");
+                    ul.setAttribute("class","scroll-box");
+                    ul.setAttribute("id","genre-"+genre);
+                    div2.appendChild(ul);
+                    sec.appendChild(div2);
+                    main_div.appendChild(sec);
+                    xhr = new XMLHttpRequest();
+                    xhr.open("GET", "http://www.localhost:5000/api/top25/genre/"+genre_list[genre], false);
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            id = "genre-"+genre;
+                            load_movies(JSON.parse(this.responseText),id);
+                        }
+                    };
+                    xhr.send();
+                }
+            }
+            // for user genres
+            xhr = new XMLHttpRequest();
+            email = "hello@gmail.com";
+            xhr.open("GET", "http://www.localhost:5000/api/user/genre/"+email, false);
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    load_genre_movies(JSON.parse(this.responseText));
+                }
+            };
+            xhr.send();
+            // for users 50 recommendations
+            xhr = new XMLHttpRequest();
+            email = "hello@gmail.com";
+            xhr.open("GET", "http://www.localhost:5000/api/top25/user/"+email, false);
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    id = "user-recommendations";
+                    load_movies(JSON.parse(this.responseText),id);
+                }
+            };
+            xhr.send();
+            // for top 50 of all time
+            xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://www.localhost:5000/api/top50/all_time", false);
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    id = "all-time-top-movies";
+                    load_movies(JSON.parse(this.responseText),id);
+                }
+            };
+            xhr.send();
+
+            // now load external js files after loading all the needed movies
+            var head_ID = document.getElementsByTagName("body")[0]; 
+            var script_element = document.createElement('script');
+            script_element.src = "js/vendor/jquery-3.2.1.min.js";
+            head_ID.appendChild(script_element);
+            console.log("done "+'js/vendor/jquery-3.2.1.min.js');
+
+            var head_ID = document.getElementsByTagName("body")[0];
+            var script_element = document.createElement('script');
+            script_element.src = 'js/owl.carousel.min.js';
+            head_ID.appendChild(script_element);
+            console.log("done "+'js/owl.carousel.min.js');
+
+            var head_ID = document.getElementsByTagName("body")[0];
+            var script_element = document.createElement('script');
+            script_element.src = 'js/masonry.pkgd.min.js';
+            head_ID.appendChild(script_element);
+            console.log("done "+'js/masonry.pkgd.min.js');
+
+            var head_ID = document.getElementsByTagName("body")[0];
+            var script_element = document.createElement('script');
+            script_element.src = 'js/bootstrap.min.js';
+            head_ID.appendChild(script_element);
+            console.log("done "+'js/bootstrap.min.js');
+
+            var head_ID = document.getElementsByTagName("body")[0];
+            var script_element = document.createElement('script');
+            script_element.src = 'js/main.js';
+            head_ID.appendChild(script_element);
+            console.log("done "+'js/main.js');
+    </script>
+	</body>
+</html>
