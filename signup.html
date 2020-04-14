@@ -120,7 +120,8 @@ button:hover {
             var d = new Date();
             d.setTime(d.getTime() + (3*24*60*60*1000));
             var expires = "expires="+ d.toUTCString();
-            document.cookie = "username=" + name + ';' + "email" + "=" + email + ";" + expires + ";path=/";
+            document.cookie = "username=" + name + ';' + ";" + expires + ";path=/";
+            document.cookie = "email" + "=" + email + ";" + expires + ";path=/";
             window.location.replace("Reroute/index.html");
             // alert("Successful!")
           }

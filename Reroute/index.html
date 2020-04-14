@@ -116,7 +116,7 @@
 				object.xhr.onreadystatechange=object.pageRedirect;
 				object.url="../php/fetch2.php?term="+object.search.value;
 				console.log(object.url);
-				object.xhr.open("GET",object.url,true);
+				object.xhr.open("GET",object.url,false);
 				object.xhr.send();
 			}
 			this.pageRedirect = function(){

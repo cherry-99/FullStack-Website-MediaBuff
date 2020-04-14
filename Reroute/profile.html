@@ -93,7 +93,7 @@
                     var div1 = document.createElement("div");
                     div1.setAttribute("class","blog-col bc-sm");
                     var a = document.createElement("a");
-                    a.setAttribute("href","localhost:8080/FullStack-Website-MediaBuff/php/dynamic.html");
+                    a.setAttribute("href","localhost/FullStack-Website-MediaBuff/php/dynamic.html");
                     var div2 = document.createElement("div");
                     div2.setAttribute("class","blog-item set-bg");
                     div2.setAttribute("data-setbg",poster_link);
@@ -161,7 +161,7 @@
 				}
 			}
             xhr = new XMLHttpRequest();
-            // email = "hello@gmail.com";
+            // email = "adithyakiran1999@gmail.com";
             xhr.open("GET", "http://www.localhost:5000/api/user/genre/"+email, false);
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -184,7 +184,7 @@
 					 email = c.substring(find_email.length, c.length);
 				}
 			}
-            // email = "hello@gmail.com";
+            // email = "adithyakiran1999@gmail.com";
             xhr.open("GET", "http://www.localhost:5000/api/top25/user/"+email, false);
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {

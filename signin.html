@@ -94,7 +94,6 @@ button:hover {
       email = document.getElementById("email").value;
       psw = document.getElementById("psw").value;
       params = {"email":email,"password":psw}
-      console.log(params);
       xhr.open('POST', url, true);
       //Send the proper header information along with the request
       xhr.setRequestHeader('Content-type', 'application/json');
@@ -102,13 +101,12 @@ button:hover {
         if(this.readyState == 4 && this.status == 200) {
             // email = document.getElementById("email").value;
             x = JSON.parse(this.responseText);
+            console.log(x);
             var d = new Date();
             d.setTime(d.getTime() + (3*24*60*60*1000));
             var expires = "expires="+ d.toUTCString();
-            var d = new Date();
-            d.setTime(d.getTime() + (3*24*60*60*1000));
-            var expires = "expires="+ d.toUTCString();
-            document.cookie = "username=" + x["username"] + ';' + "email" + "=" + x["email"] + ";" + expires + ";path=/";
+            document.cookie = "username=" + x["username"] + ';' + expires + ";path=/";
+            document.cookie = "email=" + x["email"] + ";"+ expires + ";path=/";
             window.location.replace("Reroute/index.html");
           }
           else if(this.readyState == 4 && this.status == 400){
