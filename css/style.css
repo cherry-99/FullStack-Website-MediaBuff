@@ -471,11 +471,12 @@ ul, ol {
 	position: absolute;
 	height: 804px;
 	width: 576px;
-	right: 325px;
+	right: 15%;
 }
 .hero-text.hello{
+	position: relative;
 	text-align: center;
-	left: 200px;
+	left: 15%;
 }
 .hi-bg {
 	position: absolute;
