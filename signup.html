@@ -116,7 +116,9 @@ button:hover {
       xhr.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
             document.cookie = "username="+name+";"+"email="+email+";";
-            window.location.replace=("Reroute/index.html");
+<<<<<<< HEAD
+
+>>>>>>> 16c251819969d2198815cd45b27efc93222f791d
             // alert("Successful!")
           }
           else if(this.readyState == 4 && this.status == 400){
@@ -340,7 +342,7 @@ button:hover {
 
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick="location.href='index.html';">Cancel</button>
-      <button type="submit" class="signupbtn" onclick="signinf()">Sign Up</button>
+      <button type="button" class="signupbtn" onclick="signinf()">Sign Up</button>
     </div>
   </div>
 </form>

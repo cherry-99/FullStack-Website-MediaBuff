@@ -91,31 +91,22 @@ button:hover {
     function signinf(){
       var xhr = new XMLHttpRequest();
       var url = 'http://localhost:5000/api/signin';
-
-      this.sendData = function(){
-        // alert("Hello");
-        name = document.getElementById("email").value;
-        psw = document.getElementById("psw").value;
-        params = '"email":'+name+','+'"password":'+psw;
-        console.log(params);
-        alert("Hello");
-        xhr.open('POST', url, true);
-
-        //Send the proper header information along with the request
-        xhr.setRequestHeader('Content-type', 'application/json');
-
-        xhr.onreadystatechange = obj.redirect;
-        xhr.send(JSON.stringify(params));
-      }
-      this.redirect = function(){
+      email = document.getElementById("email").value;
+      psw = document.getElementById("psw").value;
+      params = {"email":name,"password":psw}
+      console.log(params);
+      xhr.open('POST', url, true);
+      //Send the proper header information along with the request
+      xhr.setRequestHeader('Content-type', 'application/json');
+      xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200) {
             email = document.getElementById("email").value;
+            x = JSON.parse(this.responseText);
             var d = new Date();
             d.setTime(d.getTime() + (3*24*60*60*1000));
             var expires = "expires="+ d.toUTCString();
-            document.cookie = "email" + "=" + email + ";" + expires + ";path=/";
+            document.cookie = "name="+x["username"]+"email" + "=" + x["email"] + ";" + expires + ";path=/";
             location.replace("Reroute/index.html");
-            // alert("Successful!")
           }
           else if(this.readyState == 4 && this.status == 400){
             alert("Account does not exist!");
@@ -123,9 +114,9 @@ button:hover {
           else if(this.readyState == 4 && this.status == 401){
             alert("Seems like you have entered the wrong password!");
           }
-        }
+        };
+      xhr.send(JSON.stringify(params));
     }
-    var obj=new signinf();
   </script>
 <body>
   <!-- Page Preloder -->
@@ -179,7 +170,7 @@ button:hover {
     
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick="location.href='index.html';">Cancel</button>
-      <button type="submit" class="signupbtn" onclick="obj.sendData()">Sign In</button>
+      <button type="button" class="signupbtn" onclick="signinf()">Sign In</button>
     </div>
   </div>
 </div>
