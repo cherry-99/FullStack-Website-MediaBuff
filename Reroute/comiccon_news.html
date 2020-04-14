@@ -1,0 +1,431 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>MediaBuff | Comic-Con News </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+		<link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
+
+		<!-- CSS here -->
+            <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../assets/css/owl.carousel.min.css">
+            <link rel="stylesheet" href="../assets/css/ticker-style.css">
+            <link rel="stylesheet" href="../assets/css/flaticon.css">
+            <link rel="stylesheet" href="../assets/css/slicknav.css">
+            <link rel="stylesheet" href="../assets/css/animate.min.css">
+            <link rel="stylesheet" href="../assets/css/magnific-popup.css">
+            <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+            <link rel="stylesheet" href="../assets/css/themify-icons.css">
+            <link rel="stylesheet" href="../assets/css/slick.css">
+            <link rel="stylesheet" href="../assets/css/nice-select.css">
+            <link rel="stylesheet" href="../assets/css/style.css">
+
+             <!-- Stylesheets -->
+             <link rel="stylesheet" href="../css/elegant-icons.css"/>
+
+             <!-- Main Stylesheets -->
+             <link rel="stylesheet" href="../css/style.css"/>
+
+   <script type="text/javascript">
+   var src_array = ["src_one","src_two","src_three","src_four","src_five","src_six","src_seven","src_eight","src_nine","src_ten","src_eleven","src_twelve","src_thirteen" , "src_fourteen","src_fifteen"];
+   var desc_array = ["desc_one","desc_two","desc_three","desc_four","desc_five","desc_six","desc_seven","desc_eight","desc_nine","desc_ten","desc_eleven","desc_twelve","desc_thirteen","desc_fourteen","desc_fifteen"];
+   var href_array = ["href_one","href_two","href_three","href_four","href_five","href_six","href_seven","href_eight","href_nine","href_ten","href_eleven","href_twelve","href_thirteen","href_fourteen","href_fifteen"];
+   
+    obj=
+    {
+        xhr: new XMLHttpRequest(),
+        showText: function(i)
+        {
+            tohide = document.getElementById("hide"+i);
+            toshow = document.getElementById("show"+i);
+            toshow.setAttribute("style", "display:block");
+            tohide.setAttribute("style", "display:none");
+        },
+        getFeed: function()
+        {
+            console.log("Inside getFeed");
+            this.xhr.onreadystatechange = this.showFeed;
+            this.xhr.open("GET", "http://localhost:8080/FullStack-Website-MediaBuff/comiccon_rss.php",true);
+            this.xhr.send();
+    
+        },
+        showFeed: function()
+        {
+            if(this.readyState == 4 && this.status == 200)
+            {
+                console.log("Inside showFeed");
+                root = this.responseXML.documentElement;
+    
+                channel = root.getElementsByTagName("channel")[0];
+                title = channel.getElementsByTagName("title")[0].innerHTML;
+    
+                items = channel.getElementsByTagName("item");
+                for(i = 0 ; i < 15 ; i++)
+                {
+    
+                    // header
+                    title = items[i].getElementsByTagName("title")[0].innerHTML;
+                    title = title.replace("<![CDATA[", "").replace("]]>", "");
+
+                    link = items[i].getElementsByTagName("link")[0].innerHTML;
+
+                    val_1 = items[i].getElementsByTagName("enclosure")[0];
+                    val = val_1.getAttribute('url');
+                    // console.log(link);
+
+                    imgsrc = document.getElementById(src_array[i]);
+                    hrefsrc = document.getElementById(href_array[i]);
+                    descsrc = document.getElementById(desc_array[i]);
+                    imgsrc.src = val;
+                    hrefsrc.innerText = title;
+                    hrefsrc.href = link;
+                    //descsrc.innerText = title;
+                }
+            }
+        }
+    }
+    </script>
+</head>
+   <body onload="obj.getFeed()">
+
+    <!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+    </div>
+ 	<!-- Offcanvas Menu Section -->
+     <div class="offcanvas-menu-wrapper">
+		<div class="menu-header">
+			<a href="./index.html" class="site-logo">
+				<h3 style="color: darkcyan;">MediaBuff</h3>
+			</a>
+			<div class="menu-switch" id="menu-canvas-close">
+				<i class="icon_close"></i>
+			</div>
+		</div>
+		<ul class="main-menu">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="movies_home.html">Movies</a></li>
+            <li><a href="news.html" class="active">News</a></li>
+            <li><a href="profile.html">Profile</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		</ul>
+	</div>
+    <!-- Offcanvas Menu Section end -->
+    
+    	<!-- Header section -->
+	<header class="header-section">
+		<a href="./index.html" class="site-logo">
+			<!-- <img src="img/logo.png" alt=""> -->
+			<h3 style="color: darkcyan;">MediaBuff | News</h3>
+		</a>
+		<div class="menu-switch" id="menu-canvas-show">
+			<i class="icon_menu"></i>
+		</div>
+	</header>
+    <!-- Header section end -->
+
+
+    <main>
+    <!-- Trending Area Start -->
+    <div class="trending-area fix" style="background-color: gray;">
+        <div class="container">
+            <div class="trending-main">
+                <!-- Trending Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="trending-tittle">
+                            <strong>Trending now</strong>
+                            <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
+                            <div class="trending-animated">
+                                <ul id="js-news" class="js-hidden">
+                                    <li class="news-item">Amber Portwood faces the music after her arrest on 'Teen Mom OG'</li>
+                                    <li class="news-item">Gauri Shinde to direct Deepika Padukone Rishi Kapoor starrer truth!</li>
+                                    <li class="news-item">Disha Patani is all praise for Tiger Shroff's 'I'm a Disco Dancer 2.0'</li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Trending Top -->
+                        <div class="trending-top mb-30">
+                            <div class="trend-top-img">
+                                <img id = "src_one" alt="">
+                                <div class="trend-top-cap">
+                                    <h2 id="desc_one"><a id="href_one"></a></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Trending Bottom -->
+                        <div class="trending-bottom">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                <div class="single-bottom mb-35">
+                                    <div class="trend-bottom-img mb-30">
+                                        <img id="src_two" alt="">
+                                    </div>
+                                    <div class="trend-bottom-cap">
+                                        <!-- <span class="color1">Lifestyple</span> -->
+                                        <h4 id="desc_two"><a id="href_two"></a></h4>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img id="src_three" alt="">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <!-- <span class="color2">Sports</span> -->
+                                            <h4><h4 id="desc_three"><a id="href_three"></a></h4></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img alt="" id="src_four">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <!-- <span class="color3">Travels</span> -->
+                                            <h4 id="desc_four"><a id="href_four"></a></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Riht content -->
+                    <div class="col-lg-4">
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img alt="" id="src_five" height="100px" width="150px">
+                            </div>
+                            <div class="trand-right-cap">
+                                <!-- <span class="color1">Concert</span> -->
+                                <h4 id="desc_five"><a id="href_five"></a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img alt="" id="src_six" height="100px" width="150px">
+                            </div>
+                            <div class="trand-right-cap">
+                                <!-- <span class="color3">sea beach</span> -->
+                                <h4 id="desc_six"><a id="href_six"></a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img alt="" id="src_seven" height="100px" width="150px">
+                            </div>
+                            <div class="trand-right-cap">
+                                <!-- <span class="color2">Bike Show</span> -->
+                                <h4 id="desc_seven"><a id="href_seven"></a></h4>
+                            </div>
+                        </div> 
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img alt="" id="src_eight" height="100px" width="150px">
+                            </div>
+                            <div class="trand-right-cap">
+                                <!-- <span class="color4">See beach</span> -->
+                                <h4 id="desc_eight"><a id="href_eight"></a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img alt="" id="src_nine" height="100px" width="150px">
+                            </div>
+                            <div class="trand-right-cap">
+                                <!-- <span class="color1">Skeping</span> -->
+                                <h4 id="desc_nine"><a id="href_nine"></a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Trending Area End -->
+
+    <!--   Weekly-News start -->
+    <div class="weekly-news-area pt-50" style="background-color: gray;">
+        <div class="container">
+           <div class="weekly-wrapper">
+                <!-- section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle mb-30">
+                            <h3>Weekly Top News</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="weekly-news-active dot-style d-flex dot-style">
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                    <img id="src_ten" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <!-- <span class="color1">Strike</span> -->
+                                    <h4 id="desc_ten"><a id="href_ten"></a></h4>
+                                </div>
+                            </div> 
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                        <img id="src_eleven" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <!-- <span class="color1">Strike</span> -->
+                                    <h4 id="desc_eleven"><a id="href_eleven"></a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                        <img id="src_twelve" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <!-- <span class="color1">Strike</span> -->
+                                    <h4 id="desc_twelve"><a id="href_twelve"></a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                    <img id="src_thirteen" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <!-- <span class="color1">Strike</span> -->
+                                    <h4 id="desc_thirteen"><a id="href_thirteen"></a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                    <img id="src_fourteen" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <!-- <span class="color1">Strike</span> -->
+                                    <h4 id="desc_fourteen"><a id="href_fourteen"></a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                    <img id="src_fifteen" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <!-- <span class="color1">Strike</span> -->
+                                    <h4 id="desc_fifteen"><a id="href_fifteen"></a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>           
+    <!-- End Weekly-News -->
+
+    
+   <footer>
+       <!-- Footer Start-->
+       <div class="footer-area footer-padding fix">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12">
+                        <div class="single-footer-caption">
+                            <div class="single-footer-caption">
+                                <!-- logo -->
+                                <div class="footer-logo">
+                                    <!-- <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a> -->
+                                    <h3 style="color: darkcyan;">MediaBuff Inc</h3>
+                                </div>
+                                <div class="footer-tittle">
+                                    <div class="footer-pera">
+                                        <p>A passionate project of three visionary students encompassing the lengths and breadths of a full fledged website. Developed under the guidence of prestigious professors at PES Uiversity. </p>
+                                    </div>
+                                </div>
+                                <!-- social -->
+                                <div class="footer-social">
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- footer-bottom aera -->
+       <div class="footer-bottom-area">
+           <div class="container">
+               <div class="footer-border">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-lg-6">
+                            <div class="footer-menu f-right">
+                                <ul>                             
+                                    <li><a href="#">Terms of use</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+           </div>
+       </div>
+       <!-- Footer End-->
+   </footer>
+   
+	<!-- JS here -->
+	
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="../assets/js/vendor/modernizr-3.5.0.min.js"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="../assets/js/popper.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="../assets/js/jquery.slicknav.min.js"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="../assets/js/owl.carousel.min.js"></script>
+        <script src="../assets/js/slick.min.js"></script>
+        <!-- Date Picker -->
+        <script src="../assets/js/gijgo.min.js"></script>
+		<!-- One Page, Animated-HeadLin -->
+        <script src="../assets/js/wow.min.js"></script>
+		<script src="../assets/js/animated.headline.js"></script>
+        <script src="../assets/js/jquery.magnific-popup.js"></script>
+
+        <!-- Breaking New Pluging -->
+        <script src="../assets/js/jquery.ticker.js"></script>
+        <script src="../assets/js/site.js"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="../assets/js/jquery.scrollUp.min.js"></script>
+        <script src="../assets/js/jquery.nice-select.min.js"></script>
+		<script src="../assets/js/jquery.sticky.js"></script>
+        
+        <!-- contact js -->
+        <script src="../assets/js/contact.js"></script>
+        <script src="../assets/js/jquery.form.js"></script>
+        <script src="../assets/js/jquery.validate.min.js"></script>
+        <script src="../assets/js/mail-script.js"></script>
+        <script src="../assets/js/jquery.ajaxchimp.min.js"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="../assets/js/plugins.js"></script>
+        <script src="../assets/js/main.js"></script>
+        <script src="../jquery-3.4.1.js"></script>
+
+        <script src="../js/main.js"></script>
+        
+    </body>
+</html>

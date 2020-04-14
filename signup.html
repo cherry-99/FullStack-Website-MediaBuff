@@ -91,7 +91,7 @@ button:hover {
 
     function signinf(){
       var xhr = new XMLHttpRequest();
-      var url = 'http://localhost:5000/api/signin';
+      var url = 'http://localhost:5000/api/signup';
       this.sendData = function(){
         name = document.getElementById("name").value;
         // console.log(name);
@@ -115,19 +115,22 @@ button:hover {
         console.log(params);
         alert("Hello");
 
-        xhr.open('POST', url, true);
+        xhr.open('PUT', url, true);
 
         //Send the proper header information along with the request
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-type', 'application/json');
 
         xhr.onreadystatechange = obj.redirect;
-        xhr.send(params);
+        xhr.send(JSON.stringify(params));
       }
       this.redirect = function(){
         if(this.readyState == 4 && this.status == 200) {
-            document.cookie = "username="+name;
-            location.replace("php/destination-location.html");
-            // alert("Successful!")
+            email = document.getElementById("email").value;
+            var d = new Date();
+            d.setTime(d.getTime() + (3*24*60*60*1000));
+            var expires = "expires="+ d.toUTCString();
+            document.cookie = "email" + "=" + email + ";" + expires + ";path=/";
+            location.replace("Reroute/index.html");
           }
           else if(this.readyState == 4 && this.status == 400){
             alert("Account does not exist!");
