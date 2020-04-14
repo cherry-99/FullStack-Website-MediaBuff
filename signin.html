@@ -93,7 +93,7 @@ button:hover {
       var url = 'http://localhost:5000/api/signin';
       email = document.getElementById("email").value;
       psw = document.getElementById("psw").value;
-      params = {"email":name,"password":psw}
+      params = {"email":email,"password":psw}
       console.log(params);
       xhr.open('POST', url, true);
       //Send the proper header information along with the request
@@ -105,7 +105,10 @@ button:hover {
             var d = new Date();
             d.setTime(d.getTime() + (3*24*60*60*1000));
             var expires = "expires="+ d.toUTCString();
-            document.cookie = "email" + "=" + x["email"] + ";" + "username=" + x["username"] + ";" + expires + ";path=/";
+            var d = new Date();
+            d.setTime(d.getTime() + (3*24*60*60*1000));
+            var expires = "expires="+ d.toUTCString();
+            document.cookie = "username=" + x["username"] + ';' + "email" + "=" + x["email"] + ";" + expires + ";path=/";
             window.location.replace("Reroute/index.html");
           }
           else if(this.readyState == 4 && this.status == 400){
