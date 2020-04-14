@@ -40,6 +40,8 @@ def add_user():
         l = [i for i in x]
     if (len(l)!=0):
         return "Email-id already registered",400
+    if(uname=="" or password=="" or email=="" or actors=="" or directors=="" or genres==""):
+        return "send valid data",401
     sql_command = "INSERT INTO users (username,password,email,actors,directors,genres) values ('"+uname+"','"+password+"','"+email+"','"+actors+"','"+directors+"','"+genres+"');"
     with engine.connect() as con:
         con.execute(sql_command)

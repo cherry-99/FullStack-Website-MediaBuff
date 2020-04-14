@@ -47,6 +47,15 @@ button:hover {
   background-color: #f44336;
 }
 
+/* Extra Style for add item button */
+.itembutton{
+  padding: 7px 10px;
+  background-color:purple;
+  float: right;
+  width: 50%;
+  height : 35px;
+}
+
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn, .signupbtn {
   float: left;
@@ -59,11 +68,11 @@ button:hover {
 }
 
 /* Clear floats */
-.clearfix::after {
+/* .clearfix::after {
   content: "";
   clear: both;
   display: table;
-}
+} */
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
@@ -71,13 +80,13 @@ button:hover {
      width: 100%;
   }
 }
-.centered {
+/* .centered {
   position: fixed;
-  top: 50%;
+  top: 70%;
   left: 50%;
   /* bring your own prefixes */
-  transform: translate(-50%, -50%);
-}
+  /* transform: translate(-50%, -50%);
+} */
 </style>
 <!-- Stylesheets -->
 <link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -92,175 +101,152 @@ button:hover {
     function signinf(){
       var xhr = new XMLHttpRequest();
       var url = 'http://localhost:5000/api/signup';
-      this.sendData = function(){
-        name = document.getElementById("name").value;
-        // console.log(name);
-        email = document.getElementById("email").value;
-        // console.log(email);
-        psw = document.getElementById("psw").value;
-        // console.log(psw);
-        psw_repeat = document.getElementById("psw-repeat").value;
-        // console.log(psw_repeat);
-        act1 = document.getElementById("actor1").value;
-        // console.log(act1);
-        act2 = document.getElementById("actor2").value;
-        // console.log(act2);
-        dir1 = document.getElementById("director1").value;
-        // console.log(dir1);
-        dir2 = document.getElementById("director2").value;
-        // console.log(dir2);
-        gen1 = document.getElementById("genre").value;
-        // console.log(gen1);
-        params = '"username":'+name+','+'"password":'+psw+','+'"email":'+email+','+'"actors":'+act1+'|'+act2+','+'"directors":'+dir1+'|'+dir2+','+'"genres":'+gen1;
-        console.log(params);
-        alert("Hello");
-
-        xhr.open('PUT', url, true);
-
-        //Send the proper header information along with the request
-        xhr.setRequestHeader('Content-type', 'application/json');
-
-        xhr.onreadystatechange = obj.redirect;
-        xhr.send(JSON.stringify(params));
-      }
-      this.redirect = function(){
+      name = document.getElementById("name").value;
+      // console.log(name);
+      email = document.getElementById("email").value;
+      // console.log(email);
+      psw = document.getElementById("psw").value;
+      // console.log(psw);
+      psw_repeat = document.getElementById("psw-repeat").value;
+      // console.log(psw_repeat);
+      params = {"username":name,"password":psw,"email":email,"actors":actor_list,"directors":director_list,"genres":genre_list}
+      console.log(params);
+      xhr.open('PUT', url, true);
+      xhr.setRequestHeader('Content-type', 'application/json');
+      xhr.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
-            email = document.getElementById("email").value;
-            var d = new Date();
-            d.setTime(d.getTime() + (3*24*60*60*1000));
-            var expires = "expires="+ d.toUTCString();
-            document.cookie = "email" + "=" + email + ";" + expires + ";path=/";
-            location.replace("Reroute/index.html");
+            document.cookie = "username="+name+";"+"email="+email+";";
+            window.location="http://localhost/FullStack-Website-MediaBuff/";
+            // alert("Successful!")
           }
           else if(this.readyState == 4 && this.status == 400){
-            alert("Account does not exist!");
+            alert("Email already registered!");
           }
           else if(this.readyState == 4 && this.status == 401){
-            alert("Seems like you have entered the wrong password!");
+            alert("Enter Valid Data");
           }
         }
+      xhr.send(JSON.stringify(params));
     }
-    var obj=new signinf();
-  </script>
-<!-- Below script for fetching list of actor 1 -->
-  <script>
-      function fillDataList()
+    // storing list of all items
+    var actor_list = "";
+    var director_list = "";
+    var genre_list = "";
+    function add_item_to_list(item){
+        if(item=="genre"){
+          if(genre_list==""){
+            genre_list+=document.getElementById("genre").value;
+          }
+          else{
+            if(genre_list.includes(document.getElementById("genre").value)){
+              console.log("already added");
+            }
+            else{
+              genre_list+="|"+document.getElementById("genre").value;
+            }
+          }
+          document.getElementById("genre").value = "";
+          h3 = document.getElementById("selected_genres");
+          h3.innerHTML = genre_list;
+        }
+        else if(item=="actor"){
+          if(actor_list==""){
+            actor_list+=document.getElementById("actor").value;
+          }
+          else{
+            if(actor_list.includes(document.getElementById("actor").value)){
+              console.log("already added");
+            }
+            else{
+              actor_list+="|"+document.getElementById("actor").value;
+            }
+          }
+          document.getElementById("actor").value = "";
+          h3 = document.getElementById("selected_actors");
+          h3.innerHTML = actor_list;
+        }
+        else {
+          if(director_list==""){
+            director_list+=document.getElementById("director").value;
+          }
+          else{
+            if(director_list.includes(document.getElementById("director").value)){
+              console.log("already added");
+            }
+            else{
+              director_list+="|"+document.getElementById("director").value;
+            }
+          }
+          document.getElementById("director").value = "";
+          h3 = document.getElementById("selected_directors");
+          h3.innerHTML = director_list;
+        }
+      }
+    </script>
+    <script>
+    //  for fetching list of actors
+      function fillactorList()
       {
         var actor_array = new Array();
-        $.get('actors.txt', function(data){
+          $.get('actors.txt', function(data){
             actor_array = data.split('\n');
-        var container = document.getElementById("actor1");
-        i = 0;
-        len = actor_array.length;
-        console.log(len);
-        dl = document.createElement("datalist");
-
-        dl.id = "act1";
-        for (; i < len; i += 1) {
-          var option = document.createElement("option");
-          option.value = actor_array[i];
-          dl.appendChild(option);
-        }
-        container.appendChild(dl);
+            var container = document.getElementById("actor");
+            i = 0;
+            len = actor_array.length;
+            console.log(len);
+            dl = document.createElement("datalist");
+            dl.id = "act";
+            for (; i < len; i += 1) {
+            var option = document.createElement("option");
+            option.value = actor_array[i];
+            dl.appendChild(option);
+          }
+          container.appendChild(dl);
         });
       }
-      fillDataList();
-  </script>
-  <!-- Below script for fetching list of actor 2 -->
-    <script>
-      function fillDataList2()
+      fillactorList();
+      // for filling director list
+      function filldirectorList()
       {
-        var actor_array = new Array();
-        $.get('actors.txt', function(data){
-            actor_array = data.split('\n');
-        var container = document.getElementById("actor2");
-        i = 0;
-        len = actor_array.length;
-        console.log(len);
-        dl = document.createElement("datalist");
-
-        dl.id = "act2";
-        for (; i < len; i += 1) {
-          var option = document.createElement("option");
-          option.value = actor_array[i];
-          dl.appendChild(option);
-        }
-        container.appendChild(dl);
-        });
-      }
-      fillDataList2();
-  </script>
-    <!-- Below script for fetching list of Director 1 -->
-    <script>
-      function fillDataList()
-      {
-        var actor_array = new Array();
+        var director_array = new Array();
         $.get('directors.txt', function(data){
-            actor_array = data.split('\n');
-        var container = document.getElementById("director1");
-        i = 0;
-        len = actor_array.length;
-        console.log(len);
-        dl = document.createElement("datalist");
-
-        dl.id = "dir1";
-        for (; i < len; i += 1) {
+            director_array = data.split('\n');
+            var container = document.getElementById("director");
+            i = 0;
+            len = director_array.length;
+            console.log(len);
+            dl = document.createElement("datalist");
+            dl.id = "dir";
+            for (; i < len; i += 1) {
+            var option = document.createElement("option");
+            option.value = director_array[i];
+            dl.appendChild(option);
+          }
+          container.appendChild(dl);
+        });
+      }
+      filldirectorList();
+      // for filling genre list
+      function fillgenreList()
+      {
+        var genre_array = new Array();
+        $.get('genres.txt', function(data){
+          genre_array = data.split('\n');
+          var container = document.getElementById("genre");
+          i = 0;
+          len = genre_array.length;
+          console.log(len);
+          dl = document.createElement("datalist");
+          dl.id = "gen";
+          for (; i < len; i += 1) {
           var option = document.createElement("option");
-          option.value = actor_array[i];
+          option.value = genre_array[i];
           dl.appendChild(option);
         }
         container.appendChild(dl);
         });
       }
-      fillDataList();
-  </script>
-   <!-- Below script for fetching list of Director 2 -->
-   <script>
-    function fillDataList()
-    {
-      var actor_array = new Array();
-      $.get('directors.txt', function(data){
-          actor_array = data.split('\n');
-      var container = document.getElementById("director2");
-      i = 0;
-      len = actor_array.length;
-      console.log(len);
-      dl = document.createElement("datalist");
-
-      dl.id = "dir2";
-      for (; i < len; i += 1) {
-        var option = document.createElement("option");
-        option.value = actor_array[i];
-        dl.appendChild(option);
-      }
-      container.appendChild(dl);
-      });
-    }
-    fillDataList();
-</script>
-<!-- Below script for fetching list of Genres -->
-<script>
-  function fillDataList()
-  {
-    var actor_array = new Array();
-    $.get('genres.txt', function(data){
-        actor_array = data.split('\n');
-    var container = document.getElementById("genre");
-    i = 0;
-    len = actor_array.length;
-    console.log(len);
-    dl = document.createElement("datalist");
-
-    dl.id = "gen";
-    for (; i < len; i += 1) {
-      var option = document.createElement("option");
-      option.value = actor_array[i];
-      dl.appendChild(option);
-    }
-    container.appendChild(dl);
-    });
-  }
-  fillDataList();
+      fillgenreList();
 </script>
 <body>
   <!-- Page Preloder -->
@@ -300,7 +286,6 @@ button:hover {
     <!-- Header section end -->
 
 <form>
-<div class="centered">
   <div class="container">
     <h2 style="color: white;">Sign Up</h2>
     <p>Please fill in this form to create an account.</p>
@@ -316,30 +301,48 @@ button:hover {
 
     <label for="psw-repeat" style="color: white;"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" id="psw-repeat" required>
-
-    <label for="actor1" style="color: white;"><b>Actor 1 </b></label>
-    <input list="act1" id="actor1" class="dropDown">
-
-    <label for="dir1" style="color: white;"><b>Director 1</b></label>
-    <input list="dir1" id="director1" class="dropDown">
+    <div><p><h4 style="color:white">SELECT AS MANY ACTORS/DIRECTORS/GENRES AS YOU LIKE</h4></p></div>
+    <div id="Genres">
+      <div id="add_genre">
+        <label for="genre" style="color: white;"><b>Genre</b></label>&nbsp;&nbsp;&nbsp;
+        <input list="gen" id="genre" class="dropDown">
+        <button type="button" class="itembutton" onclick="add_item_to_list('genre')">Add Genre</button><br>
+      </div>
+      <div>
+        <p><h5 style="color:white">Your Genres : </h5></p> <p><h6 id="selected_genres" style="color:white"></h6></p>
+      </div>
+    </div>
     <br>
-    <label for="actor2" style="color: white;"><b>Actor 2</b></label>
-    <input list="act2" id="actor2" class="dropDown">
-
-    <label for="dir2" style="color: white;"><b>Director 2</b></label>
-    <input list="dir2" id="director2" class="dropDown">
+    <div id="Actors">
+      <div id="add_actor">
+        <label for="actor" style="color: white;"><b>Actor</b></label>&nbsp;&nbsp;&nbsp;
+        <input list="act" id="actor" class="dropDown">
+        <button type="button" class="itembutton" onclick="add_item_to_list('actor')">Add Actor</button><br>
+      </div>
+      <div>
+        <p><h5 style="color:white">Your Actors : </h5></p> <p><h6 id="selected_actors" style="color:white"></h6></p>
+      </div>
+    </div>
     <br>
-    <label for="genre" style="color: white;"><b>Genre</b></label>
-    <input list="gen" id="genre" class="dropDown">
+    <div id="Directors">
+      <div id="add_genre">
+        <label for="director" style="color: white;"><b>Director</b></label>&nbsp;&nbsp;&nbsp;
+        <input list="dir" id="director" class="dropDown">
+        <button type="button" class="itembutton" onclick="add_item_to_list('director')">Add Director</button><br>
+      </div>
+      <div>
+        <p><h5 style="color:white">Your Directors : </h5></p> <p><h6 id="selected_directors" style="color:white"></h6></p>
+      </div>
+    </div>
+    <br>
     
     <p style="color: white;">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick="location.href='index.html';">Cancel</button>
-      <button type="submit" class="signupbtn" onclick="obj.sendData()">Sign Up</button>
+      <button type="submit" class="signupbtn" onclick="signinf()">Sign Up</button>
     </div>
   </div>
-</div>
 </form>
 
 <!--====== Javascripts & Jquery ======-->
