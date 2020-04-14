@@ -125,7 +125,7 @@
 				}
 			}
 			this.getName = function(){
-				var name = "email" + "=";
+				var name = "username" + "=";
 				var decodedCookie = decodeURIComponent(document.cookie);
 				var ca = decodedCookie.split(';');
 				for(var i = 0; i <ca.length; i++) {
@@ -137,6 +137,7 @@
 						 this.replace = c.substring(name.length, c.length);
 					}
 				}
+				console.log(replace);
 				var val = document.getElementById("username");
 				val.innerText = "Hello" + this.replace;
 			}

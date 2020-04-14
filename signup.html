@@ -116,7 +116,7 @@ button:hover {
       xhr.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
             document.cookie = "username="+name+";"+"email="+email+";";
-            window.location="http://localhost/FullStack-Website-MediaBuff/";
+            window.location.replace=("Reroute/index.html");
             // alert("Successful!")
           }
           else if(this.readyState == 4 && this.status == 400){

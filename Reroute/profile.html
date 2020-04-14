@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>Cassi | Photo Studio HTML Template</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="Cassi Photo Studio HTML Template">
-	<meta name="keywords" content="photo, html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MediaBuff | News </title>
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="css/elegant-icons.css"/>
+	<link rel="stylesheet" href="../css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="../css/elegant-icons.css"/>
 
 	<!-- Main Stylesheets -->
-	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
-	<!-- Page Preloder -->
+    <!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
-	</div>
-
-	<!-- Offcanvas Menu Section -->
-	<div class="offcanvas-menu-wrapper">
+    </div>
+ 	<!-- Offcanvas Menu Section -->
+     <div class="offcanvas-menu-wrapper">
 		<div class="menu-header">
 			<a href="./index.html" class="site-logo">
-				<img src="img/logo.png" alt="">
+				<h3 style="color: darkcyan;">MediaBuff</h3>
 			</a>
 			<div class="menu-switch" id="menu-canvas-close">
 				<i class="icon_close"></i>
@@ -32,24 +27,25 @@
 		</div>
 		<ul class="main-menu">
 			<li><a href="index.html">Home</a></li>
-			<li><a href="gallery.html">Movies</a></li>
-			<li><a href="blog.html" class="active">Blog</a></li>
-			<li><a href="about.html">About</a></li>
+			<li><a href="movies_home.html">Movies</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="#" class="active">Profile</a></li>
 			<li><a href="contact.html">Contact</a></li>
 		</ul>
 	</div>
-	<!-- Offcanvas Menu Section end -->
+    <!-- Offcanvas Menu Section end -->
 	
-	<!-- Header section -->
-	<header class="header-section">
-		<a href="./index.html" class="site-logo">
-			<img src="img/logo.png" alt="">
-		</a>
-		<div class="menu-switch" id="menu-canvas-show">
-			<i class="icon_menu"></i>
-		</div>
-	</header>
-    <!-- Header section end -->
+    	<!-- Header section -->
+        <header class="header-section">
+            <a href="./index.html" class="site-logo">
+                <!-- <img src="img/logo.png" alt=""> -->
+                <h3 style="color: darkcyan;">MediaBuff | Profile</h3>
+            </a>
+            <div class="menu-switch" id="menu-canvas-show">
+                <i class="icon_menu"></i>
+            </div>
+        </header>
+        <!-- Header section end -->
 
     <!-- Users Personal Recommendations -->
     <div class="feature-blog set-bg">
@@ -149,8 +145,23 @@
                 }
             }
             // for user genres
+
+            // Retrieving cookies
+            var email = null;
+            var find_email = "email" + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(find_email) == 0) {
+					 email = c.substring(find_email.length, c.length);
+				}
+			}
             xhr = new XMLHttpRequest();
-            email = "hello@gmail.com";
+            // email = "hello@gmail.com";
             xhr.open("GET", "http://www.localhost:5000/api/user/genre/"+email, false);
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -160,7 +171,20 @@
             xhr.send();
             // for users 50 recommendations
             xhr = new XMLHttpRequest();
-            email = "hello@gmail.com";
+            var email = null;
+            var find_email = "email" + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(find_email) == 0) {
+					 email = c.substring(find_email.length, c.length);
+				}
+			}
+            // email = "hello@gmail.com";
             xhr.open("GET", "http://www.localhost:5000/api/top25/user/"+email, false);
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
