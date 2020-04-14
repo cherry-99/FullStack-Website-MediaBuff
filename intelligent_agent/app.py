@@ -4,10 +4,14 @@ from sqlalchemy import create_engine
 import sqlalchemy
 import pandas as pd
 import numpy as np
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app)
 
 df = pd.read_csv("../php/Final.csv")
+df2 = pd.read_csv("../php/poster_locations.csv")
+poster_loc = {i:j for i,j in zip(df2["movie_title"],df2["poster_link"])}
 # database creation --- database name = assignment1.db, tables = users
 engine = create_engine("sqlite:///users.db")
 try:
@@ -89,17 +93,20 @@ def top25_year(year_required):
         if year_required == year:
             top_movies.append([movie,score])
     top_movies.sort(key=lambda x:x[1],reverse=True)
-    top_movies = top_movies[:25]
-    top_movies =[i[0] for i in top_movies]
+    top_movies = list(set([i[0] for i in top_movies[:25]]))
+    top_movies =[[i,poster_loc[i]] for i in top_movies if i in poster_loc]
     return jsonify(top_movies),200
 
 # top 50 rated movies of all time
 @app.route('/api/top50/all_time', methods=['GET'])
 def top_all_time():
-    all_time_top = [[i,j] for i,j in zip(df["movie_title"],df["imdb_score"])]
+    all_time_top =[] 
+    for i,j in zip(df["movie_title"],df["imdb_score"]):
+        if([i,j] not in all_time_top):
+            all_time_top.append([i,j])
     all_time_top.sort(key=lambda x:x[1],reverse=True)
     all_time_top = all_time_top[:50]
-    all_time_top =[i[0] for i in all_time_top]
+    all_time_top =[[i[0],poster_loc[i[0]]] for i in all_time_top if i[0] in poster_loc]
     return jsonify(all_time_top),200
 
 # top 25 rated movies from a genre
@@ -110,8 +117,8 @@ def top25_genre(genre_required):
         if genre_required in genre:
             genre_based_movies.append([movie,score])
     genre_based_movies.sort(key=lambda x:x[1],reverse=True)
-    genre_based_movies = genre_based_movies[:25]
-    genre_based_movies =[i[0] for i in genre_based_movies]
+    genre_based_movies = list(set([i[0] for i in genre_based_movies[:25]]))
+    genre_based_movies =[[i,poster_loc[i]] for i in genre_based_movies if i in poster_loc]
     return jsonify(genre_based_movies),200
 
 # 25 movies related to a particular movie
@@ -123,15 +130,24 @@ def top25_movie():
         similarity_scores = json.load(f)
     if "\xa0" not in movie_name:
         movie_name+="\xa0"
-    res = similarity_scores[movie_name]
-    res =[i[0] for i in res]
+    res = list(set([i[0] for i in similarity_scores[movie_name]]))
+    res =[[i,poster_loc[i]] for i in res if i in poster_loc]
     return jsonify(res),200
+
+# get users genres
+@app.route('/api/user/genre/<email>',methods=["GET"])
+def get_genres(email):
+    sql_command = "select genres from users where email='"+email+"';"
+    with engine.connect() as con:
+        x = con.execute(sql_command)
+        l = [i for i in x]
+    users_genres = l[0][0].split("|")
+    return jsonify(users_genres),200
 
 # 25 movies suggested for a user
 # body required : {"email":"email-id"}
-@app.route('/api/top25/user', methods=['GET'])
-def get_user_suggestions():
-    email = request.get_json()["email"]
+@app.route('/api/top25/user/<email>', methods=['GET'])
+def get_user_suggestions(email):
     sql_command = "select actors,directors,genres from users where email='"+email+"';"
     with engine.connect() as con:
         x = con.execute(sql_command)
@@ -165,7 +181,8 @@ def get_user_suggestions():
         suggestions.append([movie,score,imdb_score])
     suggestions.sort(key=lambda x:[-x[1],-x[2]])
     suggestions = suggestions[:50]
-    suggestions = [i[0] for i in suggestions]
+    suggestions = list(set([i[0] for i in suggestions]))
+    suggestions = [[i,poster_loc[i]] for i in suggestions if i in poster_loc]
     return jsonify(suggestions),200
 
 app.run(debug=True)
