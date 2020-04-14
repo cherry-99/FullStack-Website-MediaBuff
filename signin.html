@@ -100,13 +100,13 @@ button:hover {
       xhr.setRequestHeader('Content-type', 'application/json');
       xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200) {
-            email = document.getElementById("email").value;
+            // email = document.getElementById("email").value;
             x = JSON.parse(this.responseText);
             var d = new Date();
             d.setTime(d.getTime() + (3*24*60*60*1000));
             var expires = "expires="+ d.toUTCString();
-            document.cookie = "name="+x["username"]+"email" + "=" + x["email"] + ";" + expires + ";path=/";
-            location.replace("Reroute/index.html");
+            document.cookie = "email" + "=" + x["email"] + ";" + "username=" + x["username"] + ";" + expires + ";path=/";
+            window.location.replace("Reroute/index.html");
           }
           else if(this.readyState == 4 && this.status == 400){
             alert("Account does not exist!");

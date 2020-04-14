@@ -32,8 +32,8 @@
 			    </div>
 		    </div>
 		    <ul class="main-menu">
-			    <li><a href="../index.html" class="active">Home</a></li>
-			    <li><a href="../gallery.html">Movies</a></li>
+			    <li><a href="../index.html">Home</a></li>
+			    <li><a href="../gallery.html" class="active">Movies</a></li>
 			    <li><a href="../blog.html">TV Series</a></li>
 			    <li><a href="../news.html">News</a></li>
 			    <li><a href="../contact.html">Contact</a></li>
@@ -43,7 +43,7 @@
         
         <!-- Header section -->
         <header class="header-section">
-            <a href="../index.html" class="site-logo">
+            <a href="../Reroute/index.html" class="site-logo">
                 <!-- <img src="img/logo.png" alt=""> -->
                 <h3 style="color: darkcyan;">MediaBuff | Movies</h3>
             </a>

@@ -28,7 +28,7 @@
 		function Suggest(){
 		//Maintain a reference to the current object
 			var object=this;
-			this.replace = null;
+			this.reps = null;
 			this.timer=null;
 			this.search=null;
 			this.container=null;
@@ -134,12 +134,12 @@
 						c = c.substring(1);
 					}
 					if (c.indexOf(name) == 0) {
-						 this.replace = c.substring(name.length, c.length);
+						 this.reps = c.substring(name.length, c.length);
 					}
 				}
-				console.log(replace);
+				console.log(this.reps);
 				var val = document.getElementById("username");
-				val.innerText = "Hello" + this.replace;
+				val.innerText = "Hello " + this.reps;
 			}
 		}
 		
@@ -181,7 +181,7 @@
 				<td><a href="./index.html" class="site-logo"><h3 style="color: darkcyan;">MediaBuff</h3></a></td>
 				<td style="padding-left: 455px;"><input type="text" placeholder="Search" id="search" onkeypress="obj.getTerm()" style="background-color: black; color: floralwhite;"></td>
 				<td style="padding-left: 20px;"><button type="submit" onclick="obj.getValue()">Search</button></td>
-				<td style="padding-left: 20px;"><p id="username" style="color: white;"></p></td>
+				<td style="padding-left: 20px;"><h4><p id="username" style="color: white; font-size: large;"></p></h4></td>
 				<td style="padding-left: 300px;"><div class="menu-switch" id="menu-canvas-show"><i class="icon_menu"></i></div></td>
 			</tr> 
 			<tr>
