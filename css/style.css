@@ -467,6 +467,16 @@ ul, ol {
 	color: #242deb;
 	margin-left: 5px;
 }
+.my-pic {
+	position: absolute;
+	height: 804px;
+	width: 576px;
+	right: 325px;
+}
+.hero-text.hello{
+	text-align: center;
+	left: 200px;
+}
 .hi-bg {
 	position: absolute;
 	height: 100%;

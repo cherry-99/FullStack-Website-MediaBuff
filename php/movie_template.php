@@ -53,8 +53,9 @@
         <section class="hero-section">
             <div class="hero-slider owl-carousel">
                 <div class="hero-item">
-				    <div class="hero-text">
-					    <h4>movie_name</h4>
+				    <div class="hero-text hello">
+						<h3 style="color: royalblue">movie_name</h3><br>
+						<h4>
                         <p>Director : movie_director</p>
                         <p>Duration : movie_duration</p>
                         <p>Actor 1 : movie_actor1</p>
@@ -64,9 +65,10 @@
                         <p>Genre : movie_genre</p>
                         <p>PEGI : movie_PEGI</p>
                         <p>IMDB Rating : movie_rating</p>
-                        <a href="movie_IMDB">Visit IMDB page</a>
+						<a href="movie_IMDB">Visit IMDB page</a>
+						</h4>
 				    </div>
-				    <div class="hi-bg set-bg" data-setbg="poster_location"></div>
+				    <div class="my-pic set-bg" data-setbg="poster_location"></div>
                 </div>
             </div>
         </section>
