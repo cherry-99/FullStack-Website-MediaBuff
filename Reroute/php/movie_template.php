@@ -4,15 +4,15 @@
 		<title>MediaBuff</title>
 		<meta charset="UTF-8">
 		<!-- Stylesheets -->
-		<link rel="stylesheet" href="../css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="../css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="../css/elegant-icons.css"/>
-		<link rel="stylesheet" href="../css/owl.carousel.min.css"/>
-		<link rel="stylesheet" href="../css/NavBar.css"/>
-		<link rel="stylesheet" href="../css/search.css"/>
+		<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="../../css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="../../css/elegant-icons.css"/>
+		<link rel="stylesheet" href="../../css/owl.carousel.min.css"/>
+		<link rel="stylesheet" href="../../css/NavBar.css"/>
+		<link rel="stylesheet" href="../../css/search.css"/>
 
 		<!-- Main Stylesheets -->
-		<link rel="stylesheet" href="../css/style.css"/>
+		<link rel="stylesheet" href="../../css/style.css"/>
 	</head>
 	<body>
         <!-- Page Preloder -->
@@ -23,7 +23,7 @@
         <!-- Offcanvas Menu Section -->
 	    <div class="offcanvas-menu-wrapper">
 		    <div class="menu-header">
-			    <a href="../index.html" class="site-logo">
+			    <a href="index.html" class="site-logo">
 				    <!-- <img src="img/logo.png" alt=""> -->
 				    <h3 style="color: darkcyan;">MediaBuff</h3>
 			    </a>
@@ -75,10 +75,10 @@
 
 
         <!--====== Javascripts & Jquery ======-->
-	    <script src="../js/vendor/jquery-3.2.1.min.js"></script>
-	    <script src="../js/bootstrap.min.js"></script>
-	    <script src="../js/owl.carousel.min.js"></script>
-	    <script src="../js/masonry.pkgd.min.js"></script>
-	    <script src="../js/main.js"></script>
+	    <script src="../../js/vendor/jquery-3.2.1.min.js"></script>
+	    <script src="../../js/bootstrap.min.js"></script>
+	    <script src="../../js/owl.carousel.min.js"></script>
+	    <script src="../../js/masonry.pkgd.min.js"></script>
+	    <script src="../../js/main.js"></script>
 </body>
 </html>

@@ -46,7 +46,7 @@
 					
 			}
 			this.sendTerm=function(){
-				object.url="../php/suggest.php?term="+object.search.value;
+				object.url="php/suggest.php?term="+object.search.value;
 				//check if the search term is available in cache
 				// i.e. Local Storage
 				if(localStorage.getItem(object.url)){
@@ -114,14 +114,14 @@
 				this.search=document.getElementById("search");
 				console.log(search.value);
 				object.xhr.onreadystatechange=object.pageRedirect;
-				object.url="../php/fetch2.php?term="+object.search.value;
+				object.url="php/fetch2.php?term="+object.search.value;
 				console.log(object.url);
 				object.xhr.open("GET",object.url,false);
 				object.xhr.send();
 			}
 			this.pageRedirect = function(){
 				if(this.readyState==4 && this.status==200){
-					location.replace("../php/dynamic.html");
+					location.replace("php/dynamic.html");
 				}
 			}
 			this.getName = function(){
@@ -165,11 +165,11 @@
 			</div>
 		</div>
 		<ul class="main-menu">
-			<li><a href="./index.html" class="active">Home</a></li>
 			<li><a href="movies_home.html">Movies</a></li>
 			<li><a href="news.html">News</a></li>
 			<li><a href="profile.html">Profile</a></li>
 			<li><a href="contact.html">Contact</a></li>
+			<li><a href="../index.html">Logout</a></li>
 		</ul>
 	</div>
 	<!-- Offcanvas Menu Section end -->

@@ -27,7 +27,7 @@
                                             var params = "name:"+name+';'+"email:"+email+';'+"comment:"+comments;
                                             console.log(params);
                                             // alert("Hello!");
-                                            $http.post("http://localhost/savestud.php", JSON.stringify(params)).then(function(response)
+                                            $http.post("http://localhost:5000/api/contact", JSON.stringify(params)).then(function(response)
                                                 {
                                                     console.log("Success");
                                                 
@@ -56,11 +56,11 @@
 			</div>
 		</div>
 		<ul class="main-menu">
-			<li><a href="index.html">Home</a></li>
 			<li><a href="movie_home.html">Movies</a></li>
 			<li><a href="news.html">News</a></li>
 			<li><a href="profile.html">Profile</a></li>
 			<li><a href="contact.html" class="active">Contact</a></li>
+			<li><a href="../index.html">Logout</a></li>
 		</ul>
 	</div>
     <!-- Offcanvas Menu Section end -->

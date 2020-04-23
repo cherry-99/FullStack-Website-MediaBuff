@@ -8,7 +8,35 @@
 	<link rel="stylesheet" href="../css/elegant-icons.css"/>
 
 	<!-- Main Stylesheets -->
-	<link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <script>
+        function Suggest(){
+        //Maintain a reference to the current object
+            var object=this;
+            this.timer=null;
+            this.search=null;
+            this.container=null;
+            this.url=null;
+            this.xhr=new XMLHttpRequest();
+            
+            
+            this.getValue = function(movie){
+                //this.search=document.getElementById("search");
+                console.log(movie);
+                object.xhr.onreadystatechange=object.pageRedirect;
+                object.url="php/fetch2.php?term="+movie;
+                console.log(object.url);
+                object.xhr.open("GET",object.url,true);
+                object.xhr.send();
+            }
+            this.pageRedirect = function(){
+                if(this.readyState==4 && this.status==200){
+                    location.replace("php/dynamic.html");
+                }
+            }
+        }
+        var obj=new Suggest();	
+    </script>
 </head>
 <body>
     <!-- Page Preloder -->
@@ -26,11 +54,11 @@
 			</div>
 		</div>
 		<ul class="main-menu">
-			<li><a href="index.html">Home</a></li>
 			<li><a href="movies_home.html">Movies</a></li>
             <li><a href="news.html">News</a></li>
             <li><a href="#" class="active">Profile</a></li>
-			<li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="../index.html">Logout</a></li>
 		</ul>
 	</div>
     <!-- Offcanvas Menu Section end -->
@@ -93,10 +121,11 @@
                     var div1 = document.createElement("div");
                     div1.setAttribute("class","blog-col bc-sm");
                     var a = document.createElement("a");
-                    a.setAttribute("href","localhost/FullStack-Website-MediaBuff/php/dynamic.html");
+                    a.setAttribute("href","localhost:8080/FullStack-Website-MediaBuff/Reroute/php/dynamic.html");
                     var div2 = document.createElement("div");
                     div2.setAttribute("class","blog-item set-bg");
                     div2.setAttribute("data-setbg",poster_link);
+                    div2.setAttribute("onclick","obj.getValue("+movie_name+'")');
                     var div3 = document.createElement("div");
                     div3.setAttribute("class","blog-text");
                     var div4 = document.createElement("div");

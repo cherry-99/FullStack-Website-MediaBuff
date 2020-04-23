@@ -1,74 +1,52 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>MediaBuff | Movies</title>
-	<meta charset="UTF-8">
+	<title>MediaBuff | Profile </title>
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="../css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="../css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="../css/elegant-icons.css"/>
 
 	<!-- Main Stylesheets -->
-	<link rel="stylesheet" href="../css/style.css"/>
-	<style>
-		hr {
-		   display: block;
-		   position: relative;
-		   padding: 0;
-		   margin: 8px auto;
-		   height: 0;
-		   width: 100%;
-		   max-height: 0;
-		   font-size: 1px;
-		   line-height: 0;
-		   clear: both;
-		   border: none;
-		   border-top: 1px solid #2fd4f1;
-		   border-bottom: 1px solid #2fd4f1;
-		}
-		</style>
-
-		<script>
-			function Suggest(){
-			//Maintain a reference to the current object
-				var object=this;
-				this.timer=null;
-				this.search=null;
-				this.container=null;
-				this.url=null;
-				this.xhr=new XMLHttpRequest();
-				
-				
-				this.getValue = function(movie){
-					//this.search=document.getElementById("search");
-					console.log(movie);
-					object.xhr.onreadystatechange=object.pageRedirect;
-					object.url="../php/fetch2.php?term="+movie;
-					console.log(object.url);
-					object.xhr.open("GET",object.url,true);
-					object.xhr.send();
-				}
-				this.pageRedirect = function(){
-					if(this.readyState==4 && this.status==200){
-						location.replace("../php/dynamic.html");
-					}
-				}
-			}
-			var obj=new Suggest();	
-		</script>
-
+    <link rel="stylesheet" href="../css/style.css"/>
+    <script>
+        function Suggest(){
+        //Maintain a reference to the current object
+            var object=this;
+            this.timer=null;
+            this.search=null;
+            this.container=null;
+            this.url=null;
+            this.xhr=new XMLHttpRequest();
+            
+            
+            this.getValue = function(movie){
+                //this.search=document.getElementById("search");
+                console.log(movie);
+                object.xhr.onreadystatechange=object.pageRedirect;
+                object.url="php/fetch2.php?term="+movie;
+                console.log(object.url);
+                object.xhr.open("GET",object.url,true);
+                object.xhr.send();
+            }
+            this.pageRedirect = function(){
+                if(this.readyState==4 && this.status==200){
+                    location.replace("php/dynamic.html");
+                }
+            }
+        }
+        var obj=new Suggest();	
+    </script>
 </head>
 <body>
-	<!-- Page Preloder -->
+    <!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
-	</div>
-
-	<!-- Offcanvas Menu Section -->
-	<div class="offcanvas-menu-wrapper">
+    </div>
+ 	<!-- Offcanvas Menu Section -->
+     <div class="offcanvas-menu-wrapper">
 		<div class="menu-header">
 			<a href="./index.html" class="site-logo">
-				<!-- <img src="img/logo.png" alt=""> -->
 				<h3 style="color: darkcyan;">MediaBuff</h3>
 			</a>
 			<div class="menu-switch" id="menu-canvas-close">
@@ -76,183 +54,168 @@
 			</div>
 		</div>
 		<ul class="main-menu">
-			<li><a href="index.html">Home</a></li>
 			<li><a href="movies_home.html" class="active">Movies</a></li>
-			<li><a href="news.html">News</a></li>
-			<li><a href="profile.html">Profile</a></li>
-			<li><a href="contact.html">Contact</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="../index.html"></a></li>
 		</ul>
-		<div class="menu-footer">
-			<div class="footer-social">
-				<a href="#">Facebook</a>
-				<a href="#">Twitter</a>
-				<a href="#">Instagram</a>
-			</div>
+	</div>
+    <!-- Offcanvas Menu Section end -->
+	
+    	<!-- Header section -->
+        <header class="header-section">
+            <a href="./index.html" class="site-logo">
+                <!-- <img src="img/logo.png" alt=""> -->
+                <h3 style="color: darkcyan;">MediaBuff | Profile</h3>
+            </a>
+            <div class="menu-switch" id="menu-canvas-show">
+                <i class="icon_menu"></i>
+            </div>
+        </header>
+        <!-- Header section end -->
+    <div style="height: 48%;width: 100%;" class="random set-bg" data-setbg="../img/MoviesCollage.jpg">
+        <h2 style="text-align: center; padding: 19%; color: white">Have You Watched These All Time Greats Yet?</h2>
+        
+    </div>
+    <!-- ALL TIME TOP MOVIES -->
+    <div class="feature-blog set-bg">
+		<div class="container">
+			<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Movies Of All Time</h2>
 		</div>
 	</div>
-	<!-- Offcanvas Menu Section end -->
-	
-	<!-- Header section -->
-	<header class="header-section">
-		<a href="./index.html" class="site-logo">
-			<!-- <img src="img/logo.png" alt=""> -->
-			<h3 style="color: darkcyan;">MediaBuff</h3>
-		</a>
-		<div class="menu-switch" id="menu-canvas-show">
-			<i class="icon_menu"></i>
-		</div>
-	</header>
-	<!-- Header section end -->
-
-	<section class="blog-section">
-		<div class="feature-blog set-bg" data-setbg="../poster/movie_collage.jpg">
-			<div class="container">
-				<div class="fb-cata">Movies</div>
-				<h2 style="color :blue">Your one stop destination for everything movies!</h2>
-				<!-- <p style="color:blue">Browse through our catalog of movies and decide on your weekend banger!</p> -->
-				<a href="#" class="site-btn">Let's get started </a>
-			</div>
-		</div>
-		<br>
-		<hr>
-		<br>
-		<h3 style="text-align: center; color: darkcyan;">Top picks</h4>
-		<br>
+    <section class="blog-section">
 		<div class="blog-post-items">
-			<div class="blog-col">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Avatar')">Avatar</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-sm">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BYThjYzcyYzItNTVjNy00NDk0LTgwMWQtYjMwNmNlNWJhMzMyXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Batman vs Superman : The Dawn Of Justice')">Batman vs Superman : The Dawn Of Justice</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-sm">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('The dark Knight Rises')">The dark Knight Rises</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-md">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMDEwZmIzNjYtNjUwNS00MzgzLWJiOGYtZWMxZGQ5NDcxZjUwXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UY268_CR6,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('John Carter')">John Carter</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BYTk3MDljOWQtNGI2My00OTEzLTlhYjQtOTQ4ODM2MzUwY2IwXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Spider Man 3')">Spider Man 3</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-big">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMjM1OTMxNzUyM15BMl5BanBnXkFtZTgwNjYzMTIzOTE@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Suicide Squad')">Suicide Squad</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-md">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Avengers : Age of Ultron')">Avengers : Age of Ultron</div>
-					</div>
-				</div>
-			</div>
-			<br>
-			<br>
-			<hr>
-			<br>
-			<h3 style="text-align: center; color: darkcyan;">Trending this month</h4>
-			<br>
-			<div class="blog-col">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BNzU3NDg4NTAyNV5BMl5BanBnXkFtZTcwOTg2ODg1Mg@@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Harry Potter and the Half blood Prince')">Harry Potter and the Half blood Prince</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-sm">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMjIyNjkxNzEyMl5BMl5BanBnXkFtZTYwMjc3MDE3._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Pirates of the carribean : At world\'s end')">Pirates of the carribean : At world's end</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-sm">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMjZiYTUzMzktZWI5Yy00Mzk4LWFlMDgtYjRmNWU0Mzc0MzNiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Quantum of Solace')">Quantum of Solace</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-md">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BZjFiMTc2MTAtZDA0My00OGRmLTk5M2ItNTlmYTUwZmU2YmRiXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('The Lone Ranger')">The Lone Ranger</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-md">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTQxOTA2NDUzOV5BMl5BanBnXkFtZTgwNzY2MTMxMzE@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Furious 7')">Furious 7</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-md">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMTMwNDg0NzcyMV5BMl5BanBnXkFtZTcwNjg4MjQyMw@@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="onj.getValue('Prince of Persia : Sands of Time')">Prince of Persia : Sands of Time</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-md">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BMzY3OTI0OTcyMF5BMl5BanBnXkFtZTgwNjkxNTAwOTE@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('The Legend of Tarzan')">The Legend of Tarzan</div>
-					</div>
-				</div>
-			</div>
-			<div class="blog-col bc-md">
-				<div class="blog-item set-bg" data-setbg="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX182_CR0,0,182,268_AL__QL50.jpg">
-					<div class="blog-text">
-						<div class="bi-cata" onclick="obj.getValue('Intersteller')">Intersteller</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+            <ul class="scroll-box" id="all-time-top-movies">
+            </ul>
+        </div>
+    </section>
 
-	<!-- Footer section -->
-	<footer class="footer-section">
-		<div class="footer-social">
-			<a href="#">Facebook</a>
-			<a href="#">Twitter</a>
-			<a href="#">Instagram</a>
-		</div>
-		<div class="copyright"><p>
-			Developed with <i class="fa fa-heart" aria-hidden="true"></i> by PES University
-			</p>
-		</div>
-	</footer>
-	<!-- Footer section end -->
+    <!-- Users Genres  -->
+    <div class="feature-blog set-bg">
+        <div class="container">
+            <h2>&nbsp;&nbsp;&nbsp;Top Movies In All Genres</h2>
+        </div>
+    </div>
+    <div id="genres-container"></div>
+    
 
 	<!--====== Javascripts & Jquery ======-->
-	<script src="../js/vendor/jquery-3.2.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/masonry.pkgd.min.js"></script>
-	<script src="../js/main.js"></script>
+    <script>
+            // function to load movies and append to ul with same id
+            function load_movies(movie_list,id){
+                console.log(movie_list);
+                var ul = document.getElementById(id);
+                for(movie in movie_list){
+                    poster_link = movie_list[movie][1];
+                    movie_name = movie_list[movie][0];
+                    var li = document.createElement("LI");
+                    var div1 = document.createElement("div");
+                    div1.setAttribute("class","blog-col bc-sm");
+                    var a = document.createElement("a");
+                    a.setAttribute("href","localhost/FullStack-Website-MediaBuff/php/dynamic.html");
+                    // a.setAttribute("onclick", obj.getValue(movie_name));
+                    var div2 = document.createElement("div");
+                    div2.setAttribute("class","blog-item set-bg");
+                    div2.setAttribute("data-setbg",poster_link);
+                    var div3 = document.createElement("div");
+                    div3.setAttribute("class","blog-text");
+                    var div4 = document.createElement("div");
+                    div4.setAttribute("class","bi-cata");
+                    div4.textContent = movie_name;
+                    div3.appendChild(div4);
+                    div2.appendChild(div3);
+                    a.appendChild(div2);
+                    div1.appendChild(a);
+                    li.appendChild(div1)
+                    ul.appendChild(li);
+                }
+            }
+            // function to create structure for genres
+            function load_genre_movies(genre_list){
+                var main_div = document.getElementById("genres-container")
+                for (genre in genre_list){
+                    var div1 = document.createElement("div");
+                    var cen = document.createElement("center");
+                    var h_two = document.createElement("h2");
+                    h_two.setAttribute("id","gen-"+genre+"-title");
+                    h_two.setAttribute("style","color:white");
+                    h_two.innerHTML = genre_list[genre];
+                    cen.appendChild(h_two);
+                    div1.appendChild(cen);
+                    main_div.appendChild(div1);
+                    sec = document.createElement("section");
+                    sec.setAttribute("class","blog-section");
+                    div2 = document.createElement("div");
+                    div2.setAttribute("class","blog-post-items");
+                    ul = document.createElement("ul");
+                    ul.setAttribute("class","scroll-box");
+                    ul.setAttribute("id","genre-"+genre);
+                    div2.appendChild(ul);
+                    sec.appendChild(div2);
+                    main_div.appendChild(sec);
+                    xhr = new XMLHttpRequest();
+                    xhr.open("GET", "http://www.localhost:5000/api/top25/genre/"+genre_list[genre], false);
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            id = "genre-"+genre;
+                            load_movies(JSON.parse(this.responseText),id);
+                        }
+                    };
+                    xhr.send();
+                }
+            }
+            // for all genres
+            xhr = new XMLHttpRequest();
+            // email = "adithyakiran1999@gmail.com";
+            xhr.open("GET", "http://www.localhost:5000/api/list/genres", false);
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    load_genre_movies(JSON.parse(this.responseText));
+                }
+            };
+            xhr.send();
+            // for top 50 of all time
+            xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://www.localhost:5000/api/top50/all_time", false);
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    id = "all-time-top-movies";
+                    load_movies(JSON.parse(this.responseText),id);
+                }
+            };
+            xhr.send();
 
+            // now load external js files after loading all the needed movies
+            var head_ID = document.getElementsByTagName("body")[0]; 
+            var script_element = document.createElement('script');
+            script_element.src = "../js/vendor/jquery-3.2.1.min.js";
+            head_ID.appendChild(script_element);
+            console.log("done "+'../js/vendor/jquery-3.2.1.min.js');
+
+            var head_ID = document.getElementsByTagName("body")[0];
+            var script_element = document.createElement('script');
+            script_element.src = '../js/owl.carousel.min.js';
+            head_ID.appendChild(script_element);
+            console.log("done "+'../js/owl.carousel.min.js');
+
+            var head_ID = document.getElementsByTagName("body")[0];
+            var script_element = document.createElement('script');
+            script_element.src = '../js/masonry.pkgd.min.js';
+            head_ID.appendChild(script_element);
+            console.log("done "+'../js/masonry.pkgd.min.js');
+
+            var head_ID = document.getElementsByTagName("body")[0];
+            var script_element = document.createElement('script');
+            script_element.src = '../js/bootstrap.min.js';
+            head_ID.appendChild(script_element);
+            console.log("done "+'../js/bootstrap.min.js');
+
+            var head_ID = document.getElementsByTagName("body")[0];
+            var script_element = document.createElement('script');
+            script_element.src = '../js/main.js';
+            head_ID.appendChild(script_element);
+            console.log("done "+'../js/main.js');
+    </script>
 	</body>
 </html>
